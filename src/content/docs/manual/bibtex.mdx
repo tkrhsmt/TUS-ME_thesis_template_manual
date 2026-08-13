@@ -117,11 +117,13 @@ BibTeX は自動で文献リストを作ってくれるとは言ったものの�
 
 <div class="tcolorbox">
 
-    @エントリー名{参照キー,
-        フィールド1 = {},
-        フィールド2 = {},
-        フィールド3 = {}
-    }
+```bibtex
+@エントリー名{参照キー,
+    フィールド1 = {},
+    フィールド2 = {},
+    フィールド3 = {}
+}
+```
 
 </div>
 
@@ -129,10 +131,12 @@ BibTeX は自動で文献リストを作ってくれるとは言ったものの�
 
 `journal` フィールドは学術雑誌論文が出された誌名を入力するフィールドです． このフィールドに入力された文字はそのまま出力されるので，title case にすることを忘れないようにしてください[^6]． 一方，文献のタイトルを入力する `title` フィールドは sentence case で出力するように `jsme.bst` で設定しています． したがって，`low Reynolds number` と入力していても `low reynolds number` と，固有名詞の冒頭まで小文字で出力されてしまいます． これを防ぐにはそのままの形で出力したい箇所を
 
-        title = {{DNS} of turbulent channel flow at very low {R}eynolds numbers}
-        title = {Subcritical transition of {Taylor--Couette--Poiseuille} flow 
-                at high radius ratio}
-        title = {A mathematical consideration of vortex thinning in {2D} turbulence}
+```bibtex
+title = {{DNS} of turbulent channel flow at very low {R}eynolds numbers}
+title = {Subcritical transition of {Taylor--Couette--Poiseuille} flow 
+        at high radius ratio}
+title = {A mathematical consideration of vortex thinning in {2D} turbulence}
+```
 
 のように括弧 `{ }` で囲ってあげる必要があります． これらの作業はどうしても人力で確認する必要があるので `bib` ファイル作成時には注意しましょう． また，`yomi` フィールドに著者の読みを入力すると，内容から判断してアルファベット順に文献をソートしてくれます． 詳細は `JSME-bst` の [`JSME-template1.pdf`](https://github.com/Yuki-MATSUKAWA/JSME-bst/blob/main/JSME-template1.pdf) を参照してください．
 
@@ -172,6 +176,6 @@ BibTeX は自動で文献リストを作ってくれるとは言ったものの�
 
 [^4]: BibTeX は現在でも広く使われていますが，最近は BibTeX の後継として `biblatex` が徐々に普及してきています．この学位論文テンプレートでは後述の `jsme.bst` を使用しているため BibTeX の内容に限定して記載しています．将来的には `biblatex` に置き換えたいと考えています．
 
-[^5]: `JSME-bst`, \<<https://github.com/Yuki-MATSUKAWA/JSME-bst>\>
+[^5]: [`JSME-bst`](https://github.com/Yuki-MATSUKAWA/JSME-bst)
 
 [^6]: 例えば，`Journal of Fluid Mechanics` と入力するべきところを `Journal of fluid mechanics` と入力するとそのまま出力されてしまいます．

@@ -77,8 +77,6 @@ Homebrew が入っていない人は以下の通り．
 
 3.  ターミナルを起動して下記コマンドを実行．
 
-<!-- -->
-
         $ sudo tlmgr update --self --all
         $ sudo tlmgr paper a4
 
@@ -164,7 +162,9 @@ pdfLaTeX はレガシー LaTeX ですが例外的に直接 PDF を出力でき�
 
 <div class="tcolorbox">
 
-    \usepackage[whole]{bxcjkjatype}
+```latex
+\usepackage[whole]{bxcjkjatype}
+```
 
 </div>
 
@@ -172,13 +172,15 @@ pdfLaTeX はレガシー LaTeX ですが例外的に直接 PDF を出力でき�
 
 <div class="tcolorbox">
 
-    プリアンブルに記載
-    \usepackage{CJKutf8}
+```latex
+% プリアンブルに記載
+\usepackage{CJKutf8}
 
-    本文中に記載
-    \begin{CJK}{UTF8}{ipxm}
-    日本語
-    \end{CJK}
+% 本文中に記載
+\begin{CJK}{UTF8}{ipxm}
+日本語
+\end{CJK}
+```
 
 </div>
 
@@ -212,7 +214,7 @@ LaTeX 関連のファイルが変更されるたびに第 1.3.1 節で紹介�
 
 </div>
 
-[^1]: `settings.json` の一例 \<<https://gist.github.com/Yuki-MATSUKAWA/465ecd0ebcbd157e48ac1e3619c9a08c>\>を紹介しておきます．LaTeX 以外の設定も含まれているので設定の取捨選択は読者の皆さんにお任せします．
+[^1]: [`settings.json` の一例](https://gist.github.com/Yuki-MATSUKAWA/465ecd0ebcbd157e48ac1e3619c9a08c)を紹介しておきます．LaTeX 以外の設定も含まれているので設定の取捨選択は読者の皆さんにお任せします．
 
 [^2]: この過程を「タイプセット」と言います．コンパイルのことだと思ってください．
 

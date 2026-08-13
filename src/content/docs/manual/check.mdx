@@ -11,9 +11,11 @@ sidebar:
 
 枠にタイトルを入れる場合．
 
-        \begin{tcolorbox}[title={ここにタイトルを入れる}]
-            枠にタイトルを入れる場合．
-        \end{tcolorbox}
+```latex
+\begin{tcolorbox}[title={ここにタイトルを入れる}]
+    枠にタイトルを入れる場合．
+\end{tcolorbox}
+```
 
 </div>
 
@@ -21,9 +23,11 @@ sidebar:
 
 枠にタイトルを入れない場合．
 
-        \begin{tcolorbox}
-            枠にタイトルを入れない場合．
-        \end{tcolorbox}
+```latex
+\begin{tcolorbox}
+    枠にタイトルを入れない場合．
+\end{tcolorbox}
+```
 
 </div>
 
@@ -37,24 +41,23 @@ sidebar:
 
 <div class="tcolorbox">
 
-    $ latexdiff -e utf8 -t CFONT --flatten old.tex new.tex > diff.tex
-    $ latexmk diff.tex
+```shell
+$ latexdiff -e utf8 -t CFONT --flatten old.tex new.tex > diff.tex
+$ latexmk diff.tex
+```
 
 </div>
 
 のようにすれば差分ファイル `diff.tex` から `diff.pdf` ファイルを生成できます． 変更前の消した箇所が<span style="color: red">小さい赤字</span>で，変更後の新しく入れた箇所が<span style="color: blue">通常サイズの青字</span>で表示されます． ただし，修正があまりにも大きい場合はうまくタイプセットできないことがあるので気をつけましょう． `--flatten` オプションを使用することで，`\input{}` の部分を実際に読み込むファイルに置き換えてくれます． しかし，`\input{}` で読み込むファイル名を変えておかないと古い内容と新しい内容を比較できません． そのため，差分を取る基準となる時点で `chapter/` を `chapter-old/` などの名称でコピーを作成し，`old.tex` 内で
 
-    \input{chapter-old/introduction.tex}
-
-    \input{chapter-old/method.tex}
-
-    \input{chapter-old/result.tex}
-
-    \input{chapter-old/discussion.tex}
-
-    \input{chapter-old/conclusion.tex}
-
-    \input{chapter-old/acknowledgement.tex}
+```latex
+\input{chapter-old/introduction.tex}
+\input{chapter-old/method.tex}
+\input{chapter-old/result.tex}
+\input{chapter-old/discussion.tex}
+\input{chapter-old/conclusion.tex}
+\input{chapter-old/acknowledgement.tex}
+```
 
 のようにすることで章ごとの変更を正しく反映できます． このとき，`new.tex` の中身は `\input{chapter/introduction.tex}` のままで大丈夫です．
 
@@ -64,7 +67,9 @@ sidebar:
 
 <div class="tcolorbox">
 
-    $ latexdiff-vc -e utf8 -t CFONT --flatten --git --force -r HEAD~ main.tex
+```shell
+$ latexdiff-vc -e utf8 -t CFONT --flatten --git --force -r HEAD~ main.tex
+```
 
 </div>
 
