@@ -1,0 +1,16 @@
+/* A splash hero without an image should use the full content width. */
+@media (min-width: 50rem) {
+	[data-has-hero] .hero {
+		grid-template-columns: 1fr;
+	}
+
+	[data-has-hero] .hero .stack,
+	[data-has-hero] .hero .copy {
+		align-items: center;
+		text-align: center;
+	}
+
+	[data-has-hero] .hero .actions {
+		justify-content: center;
+	}
+}

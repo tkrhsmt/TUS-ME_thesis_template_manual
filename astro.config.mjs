@@ -9,6 +9,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: '東京理科大学 機械航空宇宙工学科 学位論文テンプレートマニュアル',
+			customCss: ['./src/styles/custom.css'],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/tkrhsmt/TUS-ME_thesis_template_manual' }],
 			defaultLocale: 'ja',
 			sidebar: [
