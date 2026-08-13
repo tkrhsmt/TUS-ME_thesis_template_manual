@@ -4,17 +4,17 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://tkrhsmt.github.io',
+	base: '/TUS-ME_thesis_template_manual',
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: '東京理科大学 機械航空宇宙工学科 学位論文テンプレートマニュアル',
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/tkrhsmt/TUS-ME_thesis_template_manual' }],
+			defaultLocale: 'ja',
 			sidebar: [
 				{
 					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
+					items:[{ autogenerate: { directory: 'guides' } }],
 				},
 				{
 					label: 'Reference',
