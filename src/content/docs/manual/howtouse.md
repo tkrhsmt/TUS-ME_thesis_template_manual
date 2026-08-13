@@ -1,0 +1,219 @@
+---
+title: 環境構築・操作方法
+description: TeX Live、エディター、タイプセット、latexmkの使い方
+sidebar:
+  order: 2
+---
+
+第 1 章では TeX/LaTeX 環境構築の方法と PDF ファイルの生成までのプロセスを説明します． 第 1.1 節では TeX Live のインストール方法について，第 1.2 節では TeX/LaTeX 対応のテキストエディター，特に VS Code の場合について述べ，第 1.3 節では PDF ファイル生成までに必要なコマンドや `latexmk` の使い方，クラウド上での LaTeX の使用について述べます．
+
+## 環境構築
+
+TeX/LaTeX を使用する際は TeX Live というディストリビューションを ご自身の PC に入れましょう． ウイルスバスターなどのウイルス対策ソフトが TeX Live のインストールを阻害するという問題が報告されているようです． 必ず阻害するわけではありませんが，一時的に動作を停止させておいてからインストールすることをオススメします． また，この章では負荷低減のためミラーサイトからのインストール方法を説明します．
+
+### Windowsの場合
+
+ここでは ISO イメージからのインストールとネットワークインストーラーからのインストールの二種類のインストール方法を説明します． ISO イメージからインストールの方が問題は発生しにくいかもしれません． 一方でやってみてダメならもう一方で試してみてください． また， `C:\Users\姓姓　名名` のように，インストールする PC のユーザー名に全角文字や空白などが入るとトラブルの原因となります． ユーザー名を半角のものに変えてからインストールすることをおすすめします．
+
+#### ISO イメージからインストール
+
+1.  [ミラーサイト](http://mirror.ctan.org/systems/texlive/Images/) から `texlive.iso` をダウンロード．
+
+2.  ダブルクリックすると BD-ROM/DVD-ROM ドライブとしてマウントされる（「セキュリティの警告」が出た場合は「開く」を選択$`\to`$エクスプローラーで開く）．
+
+3.  共通事項 次の手順へ．
+
+#### ネットワークインストーラーからのインストール
+
+1.  [ミラーサイト](http://mirror.ctan.org/systems/texlive/tlnet/) から `install-tl.zip` をダウンロード．
+
+2.  `install-tl.zip` を展開．
+
+3.  共通事項 次の手順へ．
+
+#### 共通事項
+
+4.  `install-tl-windows.bat` を実行（青い警告ウィンドウが出たら「詳細情報」$`\to`$「実行」）．<span id="enum:bat" label="enum:bat"></span>
+
+5.  TeX Liveインストーラが現れたら「TeXworksをインストール」のチェックを外してからインストール（もしTeXworksが欲しかったらインストールしてもよい）．インストールは数時間かかることがあるので注意．
+
+6.  インストールできたかどうかチェック．
+
+    1.  `Win`$`+`$`R` でファイル名を `cmd` と指定し `cmd.exe`（コマンドプロンプトとも呼ぶ）を開く．
+
+    2.  `tex -v` と入力し `Enter`．
+
+    3.  バージョン情報が出てきたらインストール完了，出なかったら一度 Path を通してみる．
+
+7.  環境変数 Path の確認．
+
+    1.  `cmd.exe` を開く．<span id="enum:path" label="enum:path"></span>
+
+        1.  `path` と入力し `Enter`．
+
+        2.  `C:\texlive\****\bin`（`****` には TeX Live のバージョンにあてはまる年が入る）があれば完了．無ければ次の手順へ．
+
+    2.  Windows の「設定」パネルを開く．<span id="enum:system" label="enum:system"></span>
+
+        1.  「システム」$`\to`$「バージョン情報」$`\to`$「システムの詳細設定」$`\to`$「環境変数」の順に開く．
+
+        2.  「システム環境変数」の「Path」をダブルクリック．
+
+        3.  `C:\texlive\****\bin` があれば完了．無ければ「新規」で追加し，次の手順へ．
+
+### macOSの場合
+
+macOS の場合は MacTeX という，TeX Live をベースとした macOS 用のディストリビューションを使用します． Homebrew が入っている人は Homebrew を使用すると楽です．
+
+        $ brew install --cask mactex-no-gui
+        $ sudo tlmgr update --self --all
+        $ sudo tlmgr paper a4
+
+Homebrew が入っていない人は以下の通り．
+
+1.  [ミラーサイト](https://mirror.ctan.org/systems/mac/mactex/) から `MacTeX.pkg` をダウンロードする．
+
+2.  ダウンロードした `MacTeX.pkg` をダブルクリックしてインストールする．
+
+3.  ターミナルを起動して下記コマンドを実行．
+
+<!-- -->
+
+        $ sudo tlmgr update --self --all
+        $ sudo tlmgr paper a4
+
+## 使用するエディター
+
+TeX/LaTeX に対応しているテキストエディターは数多く存在しますが，ここでは Microsoft が開発している Visual Studio Code（VS Code）を紹介します． 開発元は Microsoft ですが，Windows だけでなく macOS や Linux でも使用可能です． また，VS Code には豊富な拡張機能が存在しているほか，Git との連携も非常に簡単なため近年非常に人気の高いエディターです． VS Code の詳細な使用方法はここでは割愛しますが，最低限の拡張機能として [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) を入れておくとよいでしょう． 取り扱う画像ファイルが多くなってきた場合は [Image preview](https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview) があると便利です． また，VS Code の設定ファイル `settings.json`[^1] でさまざまな設定を書き加えることができます．
+
+## PDF ファイルの生成
+
+ここでは実際に PDF ファイル（このテンプレートでは `main.pdf`）を生成する過程を説明します[^2]． これまでにある程度 LaTeX を使った経験のある方は必要な箇所だけ読めばいい（全部わかっていれば読む必要は無い）と思います． と言っても，LaTeX 初心者も全部を読む必要は無く，<span style="color: red">「一旦このテンプレートで学位論文を書き上げたい」ということを考えている人は第 1.3.1 節の「LuaLaTeX の場合（このテンプレートはこちら）」と第 1.3.3 節を読めば大丈夫</span>です． また，操作の途中でエラーが発生した場合は `log` ファイルのメッセージを確認するようにしましょう． デフォルトでは `latex.out/main.log` というファイル名で出力されます． エラーメッセージを基に，原因を詳細に調べたい方はインターネットで検索するか第 さらに詳しい情報 章を読んでください．
+
+### ターミナル上での操作
+
+第 1.3.3 節の `latexmk` を使用すればターミナル上での操作は非常に簡単になりますが，何か問題が発生した際にデバッグをすることを考えるとターミナル上での操作も覚えておく必要があります． 実際に PDF ファイルを生成するときは `latexmk` を使用すればいいのですが，まずはどのようなプロセスで実行されているのかを把握しておきましょう．
+
+#### LuaLaTeX の場合（このテンプレートはこちら）
+
+この LaTeX テンプレートは LuaLaTeX での執筆を前提とし，参考文献は upBibTeX で読み込むようにしています． LuaLaTeX は速度がやや遅いものの，高機能で Unicode に対応しているため近年人気が出てきているモダンな LaTeX です． 使い方の詳細は下記のようになります．
+
+<div class="tcolorbox">
+
+    $ lualatex main
+    $ upbibtex main
+    $ lualatex main （複数回）
+
+</div>
+
+まずは主要な LaTeX ソースコードの `main.tex` を LuaLaTeX で読み込むために `lualatex main` とターミナルに入力します． `$` は入力しないでください． 拡張子の `.tex` は省略可能です． 次に，参考文献を読み込むために `upbibtex main` とターミナルに入力します． BibTeX を使わない処理をしているときはこの操作は不要です． これだけだとまだ LaTeX を使う大きなメリットである相互参照の機能を使えていません． LaTeX で相互参照を有効にするには複数回の `lualatex` の実行が必要です． 相互参照に失敗した場合や実行回数が足りていない場合は参照箇所が ? や ?? のように表示されるはずです． そのため，upBibTeX を読み込んだ後に ? や ?? が消えるまで複数回 `lualatex` を実行しましょう． これで `main.pdf` を作成できました．
+
+#### レガシー LaTeX の場合
+
+モダン LaTeX とレガシー LaTeX の最大の違いは，PDF ファイルを直接生成できるか否かです． pLaTeX や upLaTeX のようなレガシー LaTeX は一度 `dvi` ファイルという中間ファイルを生成し，その後 `dvi` ファイルを `pdf` 等の適切なファイル形式に変換する作業が必要です（`dvipdfmx`）． これからの時代はどんどんモダン LaTeX に置き換えられていくと思いますが，まだ対応していない学会・論文テンプレートも多く存在しているのでここで紹介しておきます． また，pdfLaTeX は本来レガシー LaTeX ですが，例外的に直接 PDF ファイルを生成でき，国際雑誌論文テンプレートではよく使用されています． ただし，pdfLaTeX は日本語に対応していないため，日本語を使用したい人は LuaLaTeX を使うようにしましょう． どうしても pdfLaTeX で日本語を使用したい（国際雑誌論文執筆の下書き等）場合は第 1.3.2 節を参照してください．
+
+pLaTeX は日本語に対応した LaTeX として長年愛用されてきましたが，今は LuaLaTeX などに置き換えられてきています． 皆さんは使わないようにしましょう． 使い方は下記の通り． LuaLaTeX の項目と同様，BibTeX を使わない場合はそこのコマンドを省略してください．
+
+<div class="tcolorbox">
+
+    $ platex main
+    $ pbibtex main
+    $ platex main （複数回）
+    $ dvipdfmx main
+
+または
+
+    $ ptex2pdf -l main
+    $ pbibtex main
+    $ ptex2pdf -l main （複数回）
+
+</div>
+
+上記コマンドの `ptex2pdf -l main` は `platex main` と `dvipdfmx main` を続けて実行するコマンドです．
+
+次に upLaTeX について説明します． これは pLaTeX を Unicode に対応させたものとなっており，現在でも広く使われています． そのため，このテンプレートを使用することだけを考える際は不要な情報ですが，念のため載せておきます． upLaTeX では upBibTeX が使えますが先程と同様，不要な場合は省略してください．
+
+<div class="tcolorbox">
+
+    $ uplatex main
+    $ upbibtex main
+    $ uplatex main （複数回）
+    $ dvipdfmx main
+
+または
+
+    $ ptex2pdf -l -u main
+    $ pbibtex main
+    $ ptex2pdf -l -u main （複数回）
+
+</div>
+
+pdfLaTeX はレガシー LaTeX ですが例外的に直接 PDF を出力できます（`dvipdfmx` が不要）． 日本語には対応していませんが，国際雑誌論文では広く使用されています． どうしても pdfLaTeX で日本語を使用したい場合は次の第 1.3.2 節を参照． 使い方は下記の通り．
+
+<div class="tcolorbox">
+
+    $ pdflatex main
+    $ upbibtex main
+    $ pdflatex main （複数回）
+
+</div>
+
+### pdfLaTeX で日本語を使用する場合
+
+国際雑誌論文等のタイプセットは pdfLaTeX が想定されていることがあります． pdfLaTeX はレガシー LaTeX でありながらも直接 PDF ファイルを生成できることから海外では広く使用されていますが，残念ながら日本語に対応していません． しかし，英語論文の下書きとして日本語を使いたい場合があると思います． その際に，見た目が少し悪くなるものの pdfLaTeX で日本語を使用する方法が一応あるのでここで紹介しておきます．
+
+<div class="tcolorbox">
+
+    \usepackage[whole]{bxcjkjatype}
+
+</div>
+
+まず，LaTeX 文書全体で日本語を使用したい場合は上記のコマンドをプリアンブルに書きます． これで文書全体で日本語の使用が可能になります． ただし，前述の通り見た目が悪くなるので下書き用（後で英語に変更する用）として使用してください．
+
+<div class="tcolorbox">
+
+    プリアンブルに記載
+    \usepackage{CJKutf8}
+
+    本文中に記載
+    \begin{CJK}{UTF8}{ipxm}
+    日本語
+    \end{CJK}
+
+</div>
+
+次に，文書全体ではなく一部分でのみ日本語を使用したい場合のコマンドは上記のようになっています． まず，`\usepackage{CJKutf8}` というパッケージを読み込むことで日本語を使用できるようにします． 厳密には日本語だけでなく，中国語（**C**hinese），日本語（**J**apanese），韓国語（**K**orean）の組版規則に対応させるためのパッケージとなります． 次に本文中の日本語を使いたい箇所を `\begin{CJK}{UTF8}{ipxm}` と `\end{CJK}` で囲ってあげればそこでは日本語を使えるようになります． 米国物理学協会（American Institute of Physics, AIP）が発行している雑誌論文（Physics of Fluids など）は著者の氏名で英語表記以外に漢字等の表記を併記することが可能になっています． このようなときにこのコマンドを使ってあげるとよいでしょう． また，日本語を使う箇所がもう少し長い場合はプリアンブルで `\newcommand*{\Ja}[1]{\begin{CJK}{UTF8}{ipxm}#1\end{CJK}}` のようにコマンドを作ってあげてもいいかもしれません．
+
+### `latexmk`を使う方法
+
+LaTeX 関連のファイルが変更されるたびに第 1.3.1 節で紹介した操作を毎回行うのは非常に面倒です． そこで `latexmk` という機能を使って簡略化しましょう． `latexmk` を使うと，このリポジトリ内に入っている `latexmkrc` というファイル[^3]を呼び出し，実行したいコマンドを一回の操作で実行してくれます． `latexmkrc` は `main.tex`（主要な LaTeX コード）と同じ階層に用意しておいてください． あとはターミナル上で `latexmk main` と打てばすべて実行してくれます．
+
+<div class="tcolorbox">
+
+    $ latexmk main
+
+</div>
+
+これで随分楽になったと思いますが，VS Code を使っている皆さんはもっと楽にできます． 私が使っている `settings.json` の中で LaTeX のビルド時に `latexmk` で実行するように設定してあるので，Windows の場合は `Ctrl`+`Alt`+`B` で同様の操作を行ってくれます． `settings.json` の設定を変更して自動タイプセットにすることもできます． また，Windows で PDF ファイルのプレビューを見たい場合は `Ctrl`+`Alt`+`V` の操作で表示できます． 作成した PDF ファイルは，自動生成される `latex.out/` ディレクトリの下に入ります． `Ctrl` キーを押しながらマウスでプレビューをクリックすると該当箇所のソースコードに飛べるのも便利な機能です．
+
+<div class="tcolorbox">
+
+- 奥村晴彦, 黒木裕介,［改訂第 9 版］LaTeX 美文書作成入門, 技術評論社 (2023), pp. 6–18, 173–176, 331–347, 360, 361.
+
+- [TeX Wiki: TeX Live/Windows](https://texwiki.texjp.org/?TeX%20Live%2FWindows)
+
+- [TeX Wiki: MacTeX](https://texwiki.texjp.org/?MacTeX)
+
+- [TeX Wiki: Latexmk](https://texwiki.texjp.org/?Latexmk).
+
+- [雑多な記録：`latexmk` の設定](https://www2.yukawa.kyoto-u.ac.jp/~koudai.sugimoto/dokuwiki/doku.php?id=latex:latexmk%E3%81%AE%E8%A8%AD%E5%AE%9A)．
+
+- [Qiita: pdfLaTeX + CJK パッケージで日本語する方法](https://qiita.com/zr_tex8r/items/cdaac1500718eb9fa330)
+
+</div>
+
+[^1]: `settings.json` の一例 \<<https://gist.github.com/Yuki-MATSUKAWA/465ecd0ebcbd157e48ac1e3619c9a08c>\>を紹介しておきます．LaTeX 以外の設定も含まれているので設定の取捨選択は読者の皆さんにお任せします．
+
+[^2]: この過程を「タイプセット」と言います．コンパイルのことだと思ってください．
+
+[^3]: 拡張子はつけないでください．

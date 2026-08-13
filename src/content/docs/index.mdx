@@ -1,12 +1,12 @@
 ---
 title: 学位論文テンプレートマニュアル
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+description: 東京理科大学 機械航空宇宙工学科の卒業論文・修士論文向けLaTeX・Typstテンプレートマニュアル
+template: splash
 hero:
-  tagline: 東京理科大学機械航空宇宙工学科の卒業論文および修士論文のためのLaTeX・Typstテンプレートマニュアルです．
+  tagline: 卒業論文・修士論文を、正しく仕上げるためのLaTeX・Typstガイド
   actions:
-    - text: マニュアルのページへ
-      link: /TUS-ME_thesis_template_manual/guides/example/
+    - text: マニュアルを読む
+      link: /TUS-ME_thesis_template_manual/manual/
       icon: right-arrow
     - text: LaTeXのテンプレート
       link: https://github.com/tsukahara-lab/TUS-ME_thesis_template
@@ -20,23 +20,23 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## 論文執筆の流れ
 
 <CardGrid>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="01 環境を整える" icon="setting">
+		各環境へのLaTeX・Typstの導入方法から、VS Code、コマンドによるPDF生成まで。
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="02 本文を書く" icon="pencil">
+		章・節、段落、相互参照、数式、単位をLaTeXで正しく記述する基本。
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="03 図表を整える" icon="document">
+		図・サブ図・表の配置、ファイル形式、コピーして使える完全なコード例。
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="04 提出に備える" icon="approve-check-circle">
+		参考文献、表記、添削差分、謝辞、付録まで、提出前に確認したい情報を網羅。
 	</Card>
 </CardGrid>
+
+:::caution[非公式テンプレート]
+このマニュアルは東京理科大学創域理工学部機械航空宇宙工学科／大学院創域理工学研究科機械航空宇宙工学専攻向けの**非公式**テンプレートです。
+:::

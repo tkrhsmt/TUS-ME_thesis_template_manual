@@ -12,14 +12,12 @@ export default defineConfig({
 			customCss: ['./src/styles/custom.css'],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/tkrhsmt/TUS-ME_thesis_template_manual' }],
 			defaultLocale: 'ja',
+			lastUpdated: true,
+			pagination: true,
 			sidebar: [
 				{
-					label: 'Guides',
-					items:[{ autogenerate: { directory: 'guides' } }],
-				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
+					label: 'テンプレートマニュアル',
+					items: [{ autogenerate: { directory: 'manual' } }],
 				},
 			],
 		}),
