@@ -5,47 +5,79 @@ sidebar:
   order: 0
 ---
 
-記号は英字・ギリシャ文字のアルファベット順に並べ、上付き添え字、下付き添え字、略語を分けて記載します。
+import {Tabs, TabItem} from '@astrojs/starlight/components';
 
-## Alphabet
+記号表は，論文で用いている数式や略称等を一覧表としてまとめるものです．
+テンプレートでは，目次のつぎに表示されます．
+記号は英字・ギリシャ文字のアルファベット順に並べます．
+記号表は重要な項目なので，基本的には全て英語で書きます．
 
-| 記号 | 意味 |
-|---|---|
-| `d` | Channel width [m] |
-| `L_j` | Computational domain size in `j`-direction [m] |
-| `N_j` | Number of grid points in `j`-direction |
-| `Re` | Reynolds number, `= ud/ν` |
-| `u` | Velocity [m/s] |
+## 記号表に入れる項目
 
-## Greek
+記号表に入れる項目としては，以下の5つがあります．
 
-| 記号 | 意味 |
-|---|---|
-| `δ` | Channel half width [m] |
-| `ε_ijk` | Levi-Civita symbol |
-| `ν` | Kinematic viscosity [m²/s] |
+- **Alphabet**：英字を使った数式記号
+- **Greek**：ギリシャ文字を使った数式記号
+- **Superscripts**：上付き文字の数式記号
+- **Subscripts**：下付き文字の数式記号
+- **Abbreviations**：略称
 
-## Superscripts
+論文中に該当するものがない場合には，項目を消しても問題ありません．
 
-| 記号 | 意味 |
-|---|---|
-| `( )*` | Normalized by outer variables, e.g., `δ` |
-| `( )+` | Normalized by inner variables, e.g., `ν/u_τ` (wall unit) |
-| `( )′` | Fluctuation component |
-| `overline(( ))` | Statistically averaged |
+## 記号表の書き方
 
-## Subscripts
+<Tabs>
+  <TabItem label="LaTeX">
+    記号表は，`chapter/signary.tex`の中に書きます．
+    テーブル環境`tblr`を使って項目を書きます．
 
-| 記号 | 意味 |
-|---|---|
-| `( )_rms` | Root mean square |
-| `( )_w` | Wall |
-| `( )_τ` | Wall unit |
+    ```latex
+    \noindent
+    {\sffamily\bfseries Alphabet}\\
+    \begin{tblr}{
+        colspec = {ll},         % 文字を左揃え
+        colspec = {X[1]X[4]}    % 各列の幅が 1:4 になるように調整
+    }
+        $d$     & Channel width [\si{m}] \\
+        $L_j$   & Computational domain size in $j$-direction [\si{m}] \\
+        $N_j$   & Number of grid points in $j$-direction \\
+        $\Re$   & Reynolds number, $= ud/\nu$ \\
+        $u$     & Velocity [\si{m/s}]
+    \end{tblr}
+    ```
 
-## Abbreviations
+    `tblr`環境は，1ページ以内に収まる際に使うことができますが，長い記号表が必要な場合は使えません．
+    このため，数ページにまたがる長い記号表が必要な場合は，`longtable`環境を使います．
 
-| 略語 | 意味 |
-|---|---|
-| CFD | Computational fluid dynamics |
-| DNS | Direct numerical simulation |
-| LES | Large eddy simulation |
+    ```latex
+    \noindent
+    \begin{longtable}{p{0.2\textwidth}p{0.8\textwidth}}
+      Alphabet\\
+          $d$     & Channel width [\si{m}] \\
+          $L_j$   & Computational domain size in $j$-direction [\si{m}] \\
+          $N_j$   & Number of grid points in $j$-direction \\
+          $\Re$   & Reynolds number, $= ud/\nu$ \\
+          $u$     & Velocity [\si{m/s}]
+    \end{longtable}
+    ```
+
+  </TabItem>
+  <TabItem label="Typst">
+    Typstでは，記号表専用の描画関数`#signary-list`が用意されています．
+
+    ```typst
+    #signary-list(title: [Alphabet],
+      (
+        [ $d$ ]   , [ Channel width [#unit("m", space: none)] ],
+        [ $L_j$ ] , [ Computational domainsize in $j$-direction [#unit("m", space: none)] ],
+        [ $N_j$ ] , [ Number of grid points in $𝑗$-direction ],
+        [ $R e$ ] , [ Reynolds number, $=u d\/nu$ ],
+        [ $u$ ]   , [ Velocity [#unit("m/s", space: none)] ],
+      )
+    )
+    #linebreak()
+    ```
+
+
+  </TabItem>
+</Tabs>

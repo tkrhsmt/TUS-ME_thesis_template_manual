@@ -1,65 +1,205 @@
 ---
 title: 表紙と本文ファイルの設定
-description: main.texで表紙情報を入力し、章ファイルを読み込む方法
+description: main.texで表紙情報を入力し，章ファイルを読み込む方法
 sidebar:
   order: 0
 ---
 
-原版の表紙例は「20＊＊年度卒業論文」「【非公式】機械航空宇宙工学科 学位論文テンプレート - LaTeXで論文を書く際に必要な最低限の情報 -」「20＊＊年2月」「東京理科大学創域理工学部機械航空宇宙工学科」「○○研究室」「75＊＊＊＊＊ 姓姓　名名」です。実際の提出時は、以下の `main.tex` の設定を自分の情報へ置き換えます。
+import { Tabs, TabItem, FileTree, Steps} from '@astrojs/starlight/components';
+
+原版の表紙は「20＊＊年度卒業論文」「題名」「20＊＊年2月」「東京理科大学創域理工学部機械航空宇宙工学科」「＊＊研究室」「75＊＊＊＊＊ 姓姓　名名」のように書きます．
+実際の提出時は，以下の `main.tex` の設定を自分の情報へ置き換えます．
 
 :::danger[題目は一字ずつ確認]
-学位論文題目は、一文字でも誤ると受理されません。提出要件に記載された題目と完全に一致させてください。長い題目を改行する場合は `\\` を入れます。
+学位論文題目は，一文字でも誤ると受理されません．
+提出要件に記載された題目と完全に一致させてください．
+長い題目を改行する場合は `\\` （Typstでは`\`）を入れます．
 :::
 
 ## 卒業論文の表紙
 
-```latex
-% 卒業「年度」
-\thesis{２０＊＊年度卒業論文}
+<Tabs>
+  <TabItem label="LaTeX">
+    ```latex
+    % 卒業「年度」
+    \thesis{２０２６年度卒業論文}
 
-% 論文題目
-\title{学位論文の題目}
+    % 論文題目
+    \title{学位論文の題目}
 
-% 卒業「年」
-\date{２０＊＊年２月}
+    % 卒業「年」
+    \date{２０２７年２月}
 
-% 大学名・学部名・学科名の間にスペースは入れない
-\affiliation{東京理科大学創域理工学部機械航空宇宙工学科}
+    % 大学名・学部名・学科名の間にスペースは入れない
+    \affiliation{東京理科大学創域理工学部機械航空宇宙工学科}
 
-\laboratory{〇〇研究室}
+    \laboratory{〇〇研究室}
 
-\author{%
-７５＊＊＊＊＊       % 学籍番号は全角7桁
-\hskip2\zw          % 学籍番号と氏名の間。削除しない
-姓姓　名名           % 姓と名の間は全角1文字
-}
+    \author{%
+    ７５＊＊＊＊＊       % 学籍番号は全角7桁
+    \hskip2\zw          % 学籍番号と氏名の間．削除しない
+    姓姓　名名           % 姓と名の間は全角1文字
+    }
 
-\makecover
-```
+    \makecover
+    ```
+    大学名・研究科名・専攻名の間にスペースは入れません．`\date{}` は修了する年を入力します．
+
+  </TabItem>
+  <TabItem label="Typst">
+    ```typst
+    #thesis_title(
+      title: [学位論文の題目],
+      year: 2026,// 卒業「年度」を入れる
+      master: false,
+      laboratory: [〇〇],
+      authors: (
+        ( student-id: "75*****",
+          name: "姓姓　名名"// 姓と名の間は全角1文字
+        ),
+      )
+    )
+    ```
+  </TabItem>
+</Tabs>
+
 
 ## 修士論文へ変更する箇所
 
-```latex
-\thesis{２０＊＊年度修士論文}
-\affiliation{東京理科大学大学院創域理工学研究科機械航空宇宙工学専攻}
-```
+修士論文の場合は，それぞれ以下の項目を変更することで，表紙を書き換えます．
 
-大学名・研究科名・専攻名の間にスペースは入れません。`\date{}` は修了する年を入力します。
+<Tabs>
+  <TabItem label="LaTeX">
+  `thesis`と`affiliation`を以下のように書き換えます．
+  ```latex
+  \thesis{２０２６年度修士論文}
+  \affiliation{東京理科大学大学院創域理工学研究科機械航空宇宙工学専攻}
+  ```
+  </TabItem>
+  <TabItem label="Typst">
+  `#thesis_title`関数の引数`master: true`にすることで，自動で切り替わります．
+  ```typst
+    #thesis_title(
+      title: [学位論文の題目],
+      year: 2026,// 卒業「年度」を入れる
+      master: true,
+      laboratory: [〇〇],
+      authors: (
+        ( student-id: "75*****",
+          name: "姓姓　名名"// 姓と名の間は全角1文字
+        ),
+      )
+    )
+    ```
+  </TabItem>
+</Tabs>
 
 ## 本文の構成
 
-表紙の後に目次と記号表を出力し、本文のページ番号をアラビア数字で開始します。ページスタイル・カウンター・番号形式を設定する3行は削除しないでください。
+表紙の後に目次と記号表を出力し，その後本文となります．
+謝辞を書いたあとに参考文献を出力し，あれば付録を最後に追加します．
 
-```latex
-\tableofcontents
-\input{chapter/signary.tex}
+<Tabs>
+  <TabItem label="LaTeX">
+  <FileTree>
 
-\clearpage
-\pagestyle{normal}
-\setcounter{page}{0}
-\pagenumbering{arabic}
-```
+  - main.tex メインのファイル
+  - chapter/ 主に文章を書く階層
+    - acknowledgement.tex
+    - appendix.tex
+    - conclusion.tex
+    - discussion.tex
+    - introduction.tex
+    - method.tex
+    - result.tex
+    - signary.tex
+  - mybib_en.bib 英語の文献
+  - mybib_jp.bib 日本語の文献
+  - setting.sty スタイルファイル（基本操作しない）
+  - jsme.bst 文献の表示スタイル（基本操作しない）
 
-長い論文を一つの `tex` ファイルへ書かず、章ごとに分割して `\input{chapter/xxx.tex}` または `\include{chapter/xxx.tex}` で読み込みます。パッケージ、独自設定、マクロは `\begin{document}` より前のプリアンブル、または `settings.sty` に記載します。
+  </FileTree>
 
-添削時はプリアンブルの `\linenumbers` を有効にすると行番号を表示できますが、提出時は必ずコメントアウトします。画像を省略してタイプセットを速くする `draft` オプションも、添削・提出時には無効にしてください。
+  長い論文を一つの `main.tex` ファイルへ書かず，章ごとに分割して `\input{chapter/xxx.tex}` で読み込みます．
+  パッケージ，独自設定，マクロは `\begin{document}` より前のプリアンブル，または `settings.sty` に記載します．
+  文献は`.bib`形式のファイルにBibTeXを入れます．
+  </TabItem>
+  <TabItem label="Typst">
+  <FileTree>
+
+  - main.typ メインのファイル
+  - chapter/ 主に文章を書く階層
+    - acknowledgement.typ
+    - appendix.typ
+    - conclusion.typ
+    - discussion.typ
+    - introduction.typ
+    - method.typ
+    - result.typ
+    - signary.typ
+  - bibliography/
+    - bibliography.typ 文献の表示スタイル（基本操作しない）
+    - ref.bib 文献
+  - style/ スタイルファイル（基本操作しない）
+    - local_function.typ
+    - thesis_style.typ
+
+  </FileTree>
+
+  長い論文を一つの `main.typ` ファイルへ書かず，章ごとに分割して `#include "chapter/xxx.typ"` で読み込みます．
+  パッケージ，独自設定は `style/thesis_style.typ` に記載します．
+  文献は`.bib`形式のファイルにBibTeXを入れます．
+
+  </TabItem>
+</Tabs>
+
+## 添削・提出時の設定
+
+添削時は，行番号を表示したままにしておくと，添削を受けやすくなります．
+テンプレートのデフォルト設定では添削設定になっており，行番号等が表示されます．
+しかし，提出時には無効に設定し直す必要があります．
+提出時には，以下の手順に従って設定を変更してください．
+
+<Tabs>
+  <TabItem label="LaTeX">
+
+  <Steps>
+
+  1. `main.tex`内の`\linenumbers`をコメントアウトする
+
+      ```latex
+      %\linenumbers
+      ```
+  2. `main.tex`内の`\documentclass`で設定されている`draft`をコメントアウトする
+
+      ```latex
+      %%% 文書クラスの設定 %%%
+      \documentclass[
+          paper=a4paper,      % A4 用紙サイズ
+          report,             % report 相当の文書クラス
+          fleqn,              % 数式を左寄せ
+          fontsize=12pt,      % 欧文サイズ 12 pt
+          jafontsize=12pt,    % 和文サイズ 12 pt
+          head_space=33mm,    % 天の余白（柱とノンブルがあるので 20 mm よりも広い）
+          foot_space=30mm,    % 地の余白（ノンブルが下の場合があるので 15 mm よりも広い）
+          gutter=25mm,        % のどの余白
+          fore-edge=10mm,     % 小口の余白
+          % draft               % 画像を省略（タイプセットを高速化．提出時はコメントアウト）
+          ]{jlreq}            % jlreq クラスを使用
+      ```
+
+  </Steps>
+
+  `draft` オプションは，テンプレートのデフォルトでコメントアウトされていますが，今一度確認してください．
+
+  </TabItem>
+  <TabItem label="Typst">
+
+  `main.typ`内の`#show: check-contents`をコメントアウトする
+
+  ```typst
+  //#show: check-contents
+  ```
+
+  </TabItem>
+</Tabs>
