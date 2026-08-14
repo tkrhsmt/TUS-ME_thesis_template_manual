@@ -5,56 +5,25 @@ sidebar:
   order: 4
 ---
 
-LaTeX で図や表を挿入するときのコマンドは初心者には覚えにくいです． また，インターネットで検索したものを継ぎ接ぎした結果，何が何だかよくわからないコードができあがるということがよく起きるのでこのファイルからコピーアンドペーストすれば問題ないようにしておきました． <span style="color: red">この章ではわかりやすくするために図表のキャプションを全て日本語で書いていますが，実際に学位論文を書く際は全て英語で書いてください．</span>
+import { Tabs, TabItem, Card } from '@astrojs/starlight/components';
+
+LaTeXで図や表を挿入するときのコマンドは初心者には覚えにくいです．
+また，Typstでは配置が自動で行われないため，本テンプレートでは自動配置を行うための`fig`コマンドを新たに用意しています．
+インターネットで検索したものを継ぎ接ぎした結果，何が何だかよくわからないコードができあがるということがよく起きるので，必ずこのファイルからコピーアンドペーストして使うようにしてください．
+
+:::caution[注意]
+この章ではわかりやすくするために図表のキャプションを全て日本語で書いていますが，実際に学位論文を書く際は全て英語で書いてください．
+:::
 
 ## 図の配置
 
 ### 図を1枚だけ配置する方法
 
-ここでは図を1枚だけ配置する方法を紹介します． 図を配置するときは `figure` 環境で図を自動配置し，`\includegraphics` で図を挿入します（図 1.1のコードを参照）． `figure` のオプション `[]` の中にある文字は出力する場所を示します．
+<Tabs>
+<TabItem label="LaTeX">
 
-- `t`ページ上部（**t**op）に図を出力
-
-- `b`ページ下部（**b**ottom）に図を出力
-
-- `p`単独ページ（**p**age）に図を出力
-
-- `h`できるだけその位置（**h**ere）に図を出力
-
-- `H`必ずその位置（**H**ere）に図を出力（`float` パッケージを必要とする）
-
-学位論文中の図は原則ページ上部に配置するのでこの `tex` ファイル中では `[tp]` に設定してあります． 皆さんはこのままコピーしてください[^1]． `\columnwidth` は現在のコラムのテキスト幅を指しており，`[width=0.5\columnwidth]` と設定することで，テキスト幅の半分の横幅で図を挿入できます． 図の大きさの指定に関してよく使うコマンドをテキストボックスにまとめてあります． `\textwidth`，`\columnwidth`，`\linewidth` はよく似たコマンドですが，二段組の論文の場合はそれぞれの段の列幅が `\columnwidth` になり，`\linewidth` はリストなどの環境下での行の長さで臨機応変に対応します． これらは文書内のある長さに対して相対的に図の大きさを決定する方法でしたが，`width=25mm` のように絶対的な長さも指定できます． `\centering` は図を中央寄せするコマンドです[^2]．
-
-また，コードにもあるように `\label{}` コマンドを挿入することでラベルを設定できます． ここでは `\label{fig:one_figure}` としており，ラベル参照時に図であることがわかるよう `fig:` を入れています． ご自身の論文の内容に合わせてキャプションやラベルは変更してください． 文章中で引用する際は `図~\ref{fig:one_figure}` のように書きます． すると図 1.1のように出力されます． ハイパーリンクも埋め込まれているので該当する図が遠く離れた位置にあっても便利です． ここで「図」と番号の間にチルダ `~` を入れているのはここでの改行を防止を目的としています．
-
-<div class="tcolorbox">
-
-【指定するもの】  
-
-| **コマンド** | **意味**       | **使用例**              |
-|:-------------|:---------------|:------------------------|
-| `width`      | 画像の幅       | `width=0.5\textwidth`   |
-| `height`     | 画像の高さ     | `height=0.1\textheight` |
-| `scale`      | 画像のスケール | `scale=0.5`             |
-
-【長さに関するコマンド】  
-
-| **コマンド**   | **意味**                 |
-|:---------------|:-------------------------|
-| `\textwidth`   | テキストエリアの幅       |
-| `\textheight`  | テキストエリアの高さ     |
-| `\columnwidth` | テキスト列の幅           |
-| `\linewidth`   | 現在の環境内での行の長さ |
-
-</div>
-
-<figure id="fig:one_figure">
-<img src="/TUS-ME_thesis_template_manual/manual/images/tiger.png" alt="虎のサンプル画像" />
-<figcaption>1枚の図．</figcaption>
-</figure>
-
-<details>
-<summary>1枚の図を配置するコード</summary>
+ここでは図を1枚だけ配置する方法を紹介します．
+図を配置するときは `figure` 環境で図を自動配置し，`\includegraphics` で図を挿入します．
 
 ```latex
 \begin{figure}[tp]
@@ -64,42 +33,93 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
     \label{fig:one_figure}
 \end{figure}
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-latex1.png)
+</Card>
 
-</details>
+`figure` のオプション `[]` の中にある文字は出力する場所を示します．
+
+- `t`：ページ上部（**t**op）に図を出力
+- `b`：ページ下部（**b**ottom）に図を出力
+- `p`：単独ページ（**p**age）に図を出力
+- `h`：できるだけその位置（**h**ere）に図を出力
+- `H`：必ずその位置（**H**ere）に図を出力（`float` パッケージを必要とする）
+
+学位論文中の図は原則ページ上部に配置するのでこの `tex` ファイル中では `[tp]` に設定してあります．
+皆さんはこのままコピーしてください[^1]．
+`\columnwidth` は現在のコラムのテキスト幅を指しており，`[width=0.5\columnwidth]` と設定することで，テキスト幅の半分の横幅で図を挿入できます．
+図の大きさの指定に関してよく使うコマンドを以下にまとめてあります．
+`\textwidth`，`\columnwidth`，`\linewidth` はよく似たコマンドですが，二段組の論文の場合はそれぞれの段の列幅が `\columnwidth` になり，`\linewidth` はリストなどの環境下での行の長さで臨機応変に対応します．
+これらは文書内のある長さに対して相対的に図の大きさを決定する方法でしたが，`width=25mm` のように絶対的な長さも指定できます． `\centering` は図を中央寄せするコマンドです[^2]．
+
+| **コマンド** | **意味**       | **使用例**              |
+|:-------------|:---------------|:------------------------|
+| `width`      | 画像の幅       | `width=0.5\textwidth`   |
+| `height`     | 画像の高さ     | `height=0.1\textheight` |
+| `scale`      | 画像のスケール | `scale=0.5`             |
+
+【長さに関するコマンド】
+
+| **コマンド**   | **意味**                 |
+|:---------------|:-------------------------|
+| `\textwidth`   | テキストエリアの幅       |
+| `\textheight`  | テキストエリアの高さ     |
+| `\columnwidth` | テキスト列の幅           |
+| `\linewidth`   | 現在の環境内での行の長さ |
+
+
+</TabItem>
+<TabItem label="Typst">
+
+ここでは図を1枚だけ配置する方法を紹介します．
+図を配置するときは `fig` コマンドで図を自動配置し，`image` で図を挿入します．
+
+```typst
+#fig(
+    image("../figure/image.svg"),
+    caption: [sample of image.],
+    label: <sample>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst1.png)
+</Card>
+
+`fig`の引数には，`caption`，`label`の他に，`placement`を指定できます．
+`placement`は，デフォルトでは`auto`になっており，自動で配置してくれます．
+しかし，場合によってうまく配置されないことがあるので，その場合は`placement`を指定して配置することができます．
+
+- `top`：ページ上部（**top**）に図を出力
+- `bottom`：ページ下部（**bottom**）に図を出力
+- `page`：単独ページ（**page**）に図を出力
+
+`image`関数では，図を挿入するPathを指定します．
+利用可能な図の形式は，以下のとおりです．
+
+| **拡張子** | **備考** |
+|:---|:---|
+| `.png` | イラストレーションおよび透明グラフィックのラスターフォーマット |
+| `.jpg` | 写真に適したロッシーラスターフォーマット |
+| `.gif` | 短編アニメーションクリップに通常使用されるラスター形式．TypstはGIFを読み込むことができますが，静的になります |
+| `.webp` | ロスリーおよびロスレス圧縮の両方をサポートするラスターフォーマット |
+| `.svg` | Webのベクターグラフィックスフォーマット |
+| `.pdf` | 高精度なドキュメントおよびグラフィックフォーマット．印刷版での正確な複製に重点を置きます |
+
+このとき，引数として`width`, `height`等のオプションを指定することで，図の大きさを調整できます．
+詳しくは[Typst公式ドキュメント](https://typst.app/docs/reference/visualize/image/)を参照してください．
+
+</TabItem>
+</Tabs>
 
 ### 図を複数枚配置する方法
 
-関連する図（ここではそれぞれの図を「サブ図」と呼称します）を複数枚配置するときは `subcaption` を使いましょう[^3]． このテンプレートでは `settings.sty` 内で読み込んでいます． 文章中では `subfigure` 環境に入れて並べます． 例えば 2 枚の図を横に並べて配置したいときは図 1.4のようになります． ここでは `\hfill` を使って図と図の間の空白を設定していますが，`\hspace{3mm}` のように設定しても構いません． `\hspace{3mm}` の場合，水平方向に$\SI{3}{\milli\meter}$の空白ができます． 3 枚のサブ図を横に並べたいときも同様で，図 1.8のようになります． 関連するサブ図を横だけでなく縦方向にも配置したいときは，図 1.13のように横並びの `\columnwidth` の合計が大きくなりすぎると自動的に縦に配列してくれます． ここでは縦方向のスペースを確保するために `\vspace{5mm}` を挿入しています．
+<Tabs>
+<TabItem label="LaTeX">
 
-<div class="tcolorbox">
-
-| **入力** | **出力** |
-|:---|:---|
-| `\ref{fig:one_figure}` | 図全体の番号（例: 4.1） |
-| `\ref{fig:two_figures}` | 図全体の番号（例: 4.2） |
-| `\ref{subfig:two_figures_a}` | 図番号とサブ図番号（例: 4.2a） |
-| `\ref{fig:two_figures}(\subref{subfig:two_figures_a})` | 4.2(a) |
-| `(\subref{subfig:two_figures_a}, \subref{subfig:two_figures_b})` | (a, b) |
-| `(\subref{subfig:four_figures_a}--\subref{subfig:four_figures_c})` | (a–c) |
-
-</div>
-
-また，`subfigure` 環境を使うことでそれぞれのサブ図にラベルを付けられます．`\ref{fig:two_figures}` は図全体の番号、`\subref{subfig:two_figures_a}` はサブ図番号だけ（例: `a`）を出力します。図 4.2(a) のようにする場合は `図~\ref{fig:two_figures}(\subref{subfig:two_figures_a})` とし、`\subref{}` 前後の括弧を忘れないでください。`\ref{subfig:two_figures_a}` なら図番号とサブ図番号が括弧なし（例: `4.2a`）で出ます。複数指定は `(\subref{...a}, \subref{...b})` → `(a, b)`、範囲指定は `(\subref{...a}--\subref{...c})` → `(a–c)` です。括弧をデフォルト出力に変える場合は `settings.sty` の `\renewcommand{\thesubfigure}{(\alph{subfigure})}` を有効にします．
-
-<figure id="fig:two_figures">
-<figure id="subfig:two_figures_a">
-<div class="example-panel">A</div>
-<figcaption>左の図．</figcaption>
-</figure>
-<figure id="subfig:two_figures_b">
-<div class="example-panel">B</div>
-<figcaption>右の図．</figcaption>
-</figure>
-<figcaption>左右の図．</figcaption>
-</figure>
-
-<details>
-<summary>2枚を横並びにするコード</summary>
+関連する図（ここではそれぞれの図を「サブ図」と呼称します）を複数枚配置するときは `subcaption` を使いましょう[^3]．
+このテンプレートでは `settings.sty` 内で読み込んでいます．
+文章中では `subfigure` 環境に入れて並べます．
+例えば 2 枚の図を横に並べて配置したいときは以下のようになります．
 
 ```latex
 \begin{figure}[tp]
@@ -110,7 +130,7 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
         \caption{左の図．}
         \label{subfig:two_figures_a}
     \end{subfigure}
-    \hfill
+    \hfill % ここで空白を入れると図が適切に配置される
     \begin{subfigure}{0.45\columnwidth}
         \centering
         \includegraphics[width=\columnwidth]{example-image-b}
@@ -121,27 +141,13 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
     \label{fig:two_figures}
 \end{figure}
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-latex2.png)
+</Card>
 
-</details>
-
-<figure id="fig:three_figures">
-<figure id="subfig:three_figures_a">
-<div class="example-panel">A</div>
-<figcaption>左の図．</figcaption>
-</figure>
-<figure id="subfig:three_figures_b">
-<div class="example-panel">B</div>
-<figcaption>中央の図．</figcaption>
-</figure>
-<figure id="subfig:three_figures_c">
-<div class="example-panel">C</div>
-<figcaption>右の図．</figcaption>
-</figure>
-<figcaption>3枚の図．</figcaption>
-</figure>
-
-<details>
-<summary>3枚を横並びにするコード</summary>
+ここでは `\hfill` を使って図と図の間の空白を設定していますが，`\hspace{3mm}` のように設定しても構いません．
+`\hspace{3mm}` の場合，水平方向に$3\ \mathrm{mm}$の空白ができます．
+3 枚のサブ図を横に並べたいときも同様で，以下のようになります．
 
 ```latex
 \begin{figure}[tp]
@@ -152,14 +158,14 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
         \caption{左の図．}
         \label{subfig:three_figures_a}
     \end{subfigure}
-    \hfill
+    \hfill % ここで空白を入れると図が適切に配置される
     \begin{subfigure}{0.32\columnwidth}
         \centering
         \includegraphics[width=\columnwidth]{example-image-b}
         \caption{中央の図．}
         \label{subfig:three_figures_b}
     \end{subfigure}
-    \hfill
+    \hfill % ここで空白を入れると図が適切に配置される
     \begin{subfigure}{0.32\columnwidth}
         \centering
         \includegraphics[width=\columnwidth]{example-image-c}
@@ -170,28 +176,11 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
     \label{fig:three_figures}
 \end{figure}
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-latex3.png)
+</Card>
 
-</details>
-
-<figure id="fig:four_figures">
-<figure id="subfig:four_figures_a">
-<div class="example-panel">A</div>
-<figcaption>左上の図．</figcaption>
-</figure>
-<figure id="subfig:four_figures_b">
-<div class="example-panel">B</div>
-<figcaption>右上の図．</figcaption>
-</figure>
-<figure id="subfig:four_figures_c">
-<div class="example-panel">C</div>
-<figcaption>左下の図．</figcaption>
-</figure>
-<figure id="subfig:four_figures_c2">
-<div class="example-panel">C</div>
-<figcaption>右下の図．</figcaption>
-</figure>
-<figcaption>上下左右に4つ配置した図．</figcaption>
-</figure>
+関連するサブ図を横だけでなく縦方向にも配置したいときは，横並びの `\columnwidth` の合計が大きくなりすぎると自動的に縦に配列してくれます．
 
 <details>
 <summary>4枚を2行2列にするコード</summary>
@@ -199,13 +188,14 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
 ```latex
 \begin{figure}[tp]
     \centering
+    % 上の行
     \begin{subfigure}{0.45\columnwidth}
         \centering
         \includegraphics[width=\columnwidth]{example-image-a}
         \caption{左上の図．}
         \label{subfig:four_figures_a}
     \end{subfigure}
-    \hfill
+    \hfill % 水平方向のスペース
     \begin{subfigure}{0.45\columnwidth}
         \centering
         \includegraphics[width=\columnwidth]{example-image-b}
@@ -213,14 +203,15 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
         \label{subfig:four_figures_b}
     \end{subfigure}
 
-    \vspace{5mm}
+    \vspace{5mm} % 縦方向のスペース
+    % 下の行
     \begin{subfigure}{0.45\columnwidth}
         \centering
         \includegraphics[width=\columnwidth]{example-image-c}
         \caption{左下の図．}
         \label{subfig:four_figures_c}
     \end{subfigure}
-    \hfill
+    \hfill % 水平方向のスペース
     \begin{subfigure}{0.45\columnwidth}
         \centering
         \includegraphics[width=\columnwidth]{example-image-c}
@@ -231,101 +222,502 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
     \label{fig:four_figures}
 \end{figure}
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-latex4.png)
+</Card>
+
+ここでは縦方向のスペースを確保するために `\vspace{5mm}` を挿入しています．
+</details>
+
+また，`subfigure` 環境を使うことでそれぞれのサブ図にラベルを付けられます．
+`\ref{fig:two_figures}` は図全体の番号，`\subref{subfig:two_figures_a}` はサブ図番号だけ（例: `a`）を出力します．
+図 4.2(a) のようにする場合は `図~\ref{fig:two_figures}(\subref{subfig:two_figures_a})` とし，`\subref{}` 前後の括弧を忘れないでください．
+`\ref{subfig:two_figures_a}` なら図番号とサブ図番号が括弧なし（例: `4.2a`）で出ます．
+複数指定は `(\subref{...a}, \subref{...b})` → `(a, b)`、範囲指定は `(\subref{...a}--\subref{...c})` → `(a–c)` です．
+括弧をデフォルト出力に変える場合は `settings.sty` の `\renewcommand{\thesubfigure}{(\alph{subfigure})}` を有効にします．
+
+| **入力** | **出力** |
+|:---|:---|
+| `\ref{fig:one_figure}` | 図全体の番号（例: 4.1） |
+| `\ref{fig:two_figures}` | 図全体の番号（例: 4.2） |
+| `\ref{subfig:two_figures_a}` | 図番号とサブ図番号（例: 4.2a） |
+| `\ref{fig:two_figures}(\subref{subfig:two_figures_a})` | 4.2(a) |
+| `(\subref{subfig:two_figures_a}, \subref{subfig:two_figures_b})` | (a, b) |
+| `(\subref{subfig:four_figures_a}--\subref{subfig:four_figures_c})` | (a–c) |
+
+</TabItem>
+<TabItem label="Typst">
+
+関連する図（ここではそれぞれの図を「サブ図」と呼称します）を複数枚配置するときは `grid` コマンドで配置します．
+例えば，２枚の図を横に並べて配置したいときは以下のようになります．
+
+```typst
+#fig(
+    grid(
+        columns: (50%, 50%),
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-B>
+        ]
+    ),
+    caption: [sample of image.],
+    label: <sample>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst2.png)
+</Card>
+
+`grid`関数の`columns`で，列の数と幅を指定できます．
+上の例では，2つの図を半分ずつの幅で配置しています．
+この部分を変更することで，縦に並べることも可能です．
+
+<details>
+<summary>縦に2枚の図を配置する例</summary>
+
+```typst
+#fig(
+    grid(
+        columns: (100%),
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-B>
+        ]
+    ),
+    caption: [sample of image.],
+    label: <sample>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst3.png)
+</Card>
 
 </details>
 
+上記の設定では自動配置の例を示していますが，最も外側の`fig`関数に`placement`を指定することで，手動で配置することもできます．
+
+スペースの関係で，異なる図番号の図を単独ページに配置したいときがあります．
+このとき，一番外側に`fig`関数を利用し，内側は`figure`関数を利用します．
+`fig`関数では`kind: "none", supplement: []`を指定することで，図番号を付けずに配置することができます．
+
+```typst
+#fig(
+    grid(
+        columns: (100%),
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+            )<sample-B>
+        ]
+    ),
+    kind: "none",
+    supplement: [],
+    placement: page
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst4.png)
+</Card>
+
+同様に`columns`を変更することで，横に並べることも可能です．
+
+<details>
+<summary>横に異なる2枚の図を単独ページに配置する例</summary>
+
+:::caution[注意]
+以下の方法はページ数を節約するために使用されますが，学位論文の場合はページ数に制限がないため，基本的に使用しないようにしてください．
+ただし，ページ数制約のあるabstractの作成時などには使用する可能性があります．
+:::
+
+```typst
+#fig(
+    grid(
+        columns: (50%, 50%),
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+            )<sample-B>
+        ]
+    ),
+    kind: "none",
+    supplement: [],
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst5.png)
+</Card>
+
+</details>
+
+3枚のサブ図を横に並べたいときも同様で，以下のようになります．
+
+<details>
+<summary>横に3枚のサブ図を配置する例</summary>
+```typst
+#fig(
+    grid(
+        columns: (auto, auto, auto),
+        column-gutter: 2%,
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-B>
+        ],
+        [
+            #figure(
+                image("../figure/image-C.svg"),
+                caption: [sample C],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-C>
+        ]
+    ),
+    caption: [sample of image.],
+    label: <sample>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst6.png)
+</Card>
+</details>
+
+<details>
+<summary>横に2枚・縦に1枚のサブ図を配置する例</summary>
+```typst
+#fig(
+    grid(
+        columns: (auto, auto),
+        column-gutter: 2%,
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-B>
+        ],
+        grid.cell(colspan: 2,[
+            #figure(
+                image("../figure/image-C.svg"),
+                caption: [sample C],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-C>
+        ])
+    ),
+    caption: [sample of image.],
+    label: <sample>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst7.png)
+</Card>
+
+:::note[補足]
+`grid.cell(colspan: 2, ..)`を利用すると，中心位置に要素を寄せることができます．
+これは，図の数が増えても同じです．
+:::
+
+</details>
+
+<details>
+<summary>縦に3枚のサブ図を配置する例</summary>
+```typst
+#fig(
+    grid(
+        columns: (auto),
+        column-gutter: 2%,
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-B>
+        ],
+        [
+            #figure(
+                image("../figure/image-C.svg"),
+                caption: [sample C],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-C>
+        ]
+    ),
+    caption: [sample of image.],
+    label: <sample>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst8.png)
+</Card>
+</details>
+
+4枚以上の場合も，同様に`grid`関数を利用することで，縦横の配置を自由に設定できます．
+
+
+<details>
+<summary>4枚のサブ図を2個ずつ配置する例</summary>
+```typst
+#fig(
+    grid(
+        columns: (auto, auto),
+        column-gutter: 5%,
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-B>
+        ],
+        [
+            #figure(
+                image("../figure/image-C.svg"),
+                caption: [sample C],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-C>
+        ],
+        [
+            #figure(
+                image("../figure/image-D.svg"),
+                caption: [sample D],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-D>
+        ]
+    ),
+    caption: [sample of image.],
+    label: <sample>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst9.png)
+</Card>
+</details>
+
+
+<details>
+<summary>4枚のサブ図を3個ずつ配置する例</summary>
+```typst
+#fig(
+    grid(
+        columns: (auto, auto, auto),
+        column-gutter: 2%,
+        [
+            #figure(
+                image("../figure/image-A.svg"),
+                caption: [sample A],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-A>
+        ],
+        [
+            #figure(
+                image("../figure/image-B.svg"),
+                caption: [sample B],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-B>
+        ],
+        [
+            #figure(
+                image("../figure/image-C.svg"),
+                caption: [sample C],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-C>
+        ],
+        [
+            #figure(
+                image("../figure/image-D.svg"),
+                caption: [sample D],
+                kind: "sub-figure",
+                supplement: [],
+            )<sample-D>
+        ]
+    ),
+    caption: [sample of image.],
+    label: <sample>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/figure-example-typst10.png)
+</Card>
+</details>
+
+また，上記のように`fig`関数と`figure`関数を組み合わせることでそれぞれのサブ図にラベルを付けることができます．
+`#figure(... )<sample-A>`のように，`< >`内にラベル名を指定することで，文章中で参照することができます．
+引用する際には，図全体の番号もサブ図の番号も，同様に`@...`で参照することができます．
+図全体の番号では，`図`という文字列が自動で付与されます（表の際には自動で`表`となります）．
+図 2.1(a)のようにする場合は`@sample(@sample-A)`とし，`@sample-A`前後の括弧を忘れないでください．
+`@sample-A`ならサブ図番号のみが括弧なし（例: `a`）で出ます．
+複数指定は`(@sample-A, @sample-B)` → `(a, b)`、範囲指定は`(@sample-A#sym.dash.en@sample-C)` → `(a–c)`です．
+
+| **入力** | **出力** |
+|:---|:---|
+| `@sample` | 図全体の番号（例: 図4.1） |
+| `@sample[]` | supplementなしの図全体の番号（例: 4.1） |
+| `@sample-A` | サブ図番号（例: a） |
+| `@sample(@sample-A)` | 図番号とサブ図番号（例: 図4.1(a)） |
+| `@sample-A` | サブ図番号のみ（例: a） |
+| `(@sample-A, @sample-B)` | (a, b) |
+| `(@sample-A#sym.dash.en@sample-C)` | (a–c) |
+
+</TabItem>
+</Tabs>
+
 ### 画像のファイル形式
 
-画像形式は大きく分類するとラスター画像とベクター画像に分類できます． 結論から先に述べると，<span style="color: red">ラスター画像であれば JPEG か PNG，ベクター画像であれば PDF を使用してください</span>．
+画像形式は大きく分類するとラスター画像とベクター画像に分類できます．
+結論から先に述べると，<span style="color: red">ラスター画像であれば JPEG か PNG，ベクター画像であれば PDF を使用してください</span>．
 
 - ラスター画像：小さな正方形（ピクセル，画素）を大量に組み合わせて作り上げた画像．ラスター画像を拡大するとピクセルの存在を確認できる．ラスター画像の例は以下の通り．
 
   - GIF (Graphics Interchange Format)：拡張子は `.gif` で，256 色以下の画像を扱える可逆圧縮形式ファイル．使用できる色は少ないものの，アニメーションにも対応していることから現在でも使う機会が多い．
-
   - JPEG (Joint Photographic Experts Group)：拡張子は `.jpeg` や `.jpg` で，最大 24 ビット（約 1677 万色）の色に対応している非可逆圧縮形式ファイル．
-
   - PNG (Portable Network Graphics)：拡張子は `.png` で，JPEG と同様 24 ビットの色に対応している可逆圧縮形式ファイル．透過処理にも対応している．
 
 - ベクター画像：円や直線などを数式的に処理することで作り上げた画像．どれだけ拡大しても明瞭なまま．ベクター画像の例は以下の通り，
 
   - PS (PostScript)：拡張子は `.ps` で，Adobe が 1984 年に開発したページ記述言語で組まれた画像形式．
-
   - EPS (Encapsulated PostScript)：拡張子は `.eps` で，PostScript の後継となる画像形式（カプセル化された PostScript）．バウンディングボックスを読み込むことで描画領域を確保する．
-
   - PDF (Portable Document Format)：拡張子は `.pdf` で，環境に左右されず，ほぼ同様の見た目で画像や文書を閲覧できる．一般的な用途では最も主流なベクター形式．
 
-ラスター画像かベクター画像かという観点では，論文中の画像はできるだけベクター画像の方がいいです． これは上記説明にも書いたように，ベクター画像は内部で数式処理をしているためいくら拡大しても解像度が落ちず明瞭なままだからです． ただし，これは一般的なグラフや簡単なカラーマップ限定の話です． 複雑なカラーマップをベクター画像にするとファイルサイズが膨大になり，画像を開くだけでも一苦労です． このような場合には諦めてラスター画像にしましょう．
+ラスター画像かベクター画像かという観点では，論文中の画像はできるだけベクター画像の方がいいです．
+これは上記説明にも書いたように，ベクター画像は内部で数式処理をしているためいくら拡大しても解像度が落ちず明瞭なままだからです．
+ただし，これは一般的なグラフや簡単なカラーマップ限定の話です．
+複雑なカラーマップをベクター画像にするとファイルサイズが膨大になり，画像を開くだけでも一苦労です．
+このような場合には諦めてラスター画像にしましょう．
 
-また，一昔前の LaTeX では画像の挿入と言えば EPS ファイルでした． しかし，現在の LaTeX 事情では EPS ファイルの使用は非推奨です． 本来 TeX エンジンは EPS ファイルを直接処理することができず，Ghostscript という PostScript 言語のインタープリターを経由しなければいけません． したがって，最初から PDF で挿入する方がよいというわけです． また，バウンディングボックスの調節がうまくいかず，EPS で挿入すると画像がずれるという問題が生じることがあります． 現代に生きる皆さんは EPS ではなく PDF を使いましょう． EPS ファイルを PDF ファイルに変換する Perl スクリプト `epstopdf` が TeX Live 標準で用意されているので必要な人は活用しましょう．
+また，一昔前の LaTeX では画像の挿入と言えば EPS ファイルでした．
+しかし，現在の LaTeX 事情では EPS ファイルの使用は非推奨です（Typstではそもそも対応していません）．
+本来 TeX エンジンは EPS ファイルを直接処理することができず，Ghostscript という PostScript 言語のインタープリターを経由しなければいけません．
+したがって，最初から PDF で挿入する方がよいというわけです．
+また，バウンディングボックスの調節がうまくいかず，EPS で挿入すると画像がずれるという問題が生じることがあります．
+現代に生きる皆さんは EPS ではなく PDF を使いましょう．
+EPS ファイルを PDF ファイルに変換する Perl スクリプト `epstopdf` が TeX Live 標準で用意されているので必要な人は活用しましょう．
 
-<figure id="fig:figure_comparison1">
-<figure id="subfig:figcomp1_pdf">
-<img src="/TUS-ME_thesis_template_manual/manual/images/comparison1-1.png" alt="文字抽出可能なPDFの例" />
-<figcaption>PDF ファイル（文字抽出可）．</figcaption>
-</figure>
-<figure id="subfig:figcomp1_pdf2">
-<img src="/TUS-ME_thesis_template_manual/manual/images/comparison1-2.png" alt="文字抽出できないPDFの例" />
-<figcaption>PDF ファイル（文字抽出不可）．</figcaption>
-</figure>
-<figure id="subfig:figcomp1_eps">
-<img src="/TUS-ME_thesis_template_manual/manual/images/comparison1-3.png" alt="EPS画像の例" />
-<figcaption>EPS ファイル．</figcaption>
-</figure>
-<figure id="subfig:figcomp1_png">
-<img src="/TUS-ME_thesis_template_manual/manual/images/comparison1-4.png" alt="PNG画像の例" />
-<figcaption>PNG ファイル．</figcaption>
-</figure>
-<figcaption>画像形式ごとの比較．</figcaption>
-</figure>
+Typstの場合は，EPSの代わりにSVGを使用できます．
+歴史的に，Typstはバージョン0.14.0（2025年10月24日）までPDF画像をサポートしていませんでした．
+しかし現在はPDFもサポートしているため，より簡便なPDFを使用することが推奨されます．
+Typst内の処理としてはPDFからSVGに変換してから描画されているので，少し重たいPDF画像を使用する場合は，SVGに変換してから使用することをおすすめします（もしくはラスター画像に変換してください）．
 
-それでは実際に画像形式を比較します．上のパネル (a), (b) は PDF、(c) は EPS、(d) は PNG です。(a)–(c) はベクター画像なので拡大しても明瞭ですが、(d) はラスター画像なので拡大するとピクセルが見えます。(a) と (b) はどちらも PDF ですが、原版PDF上で `Ctrl`+`A` を押すと (a) は文字を抽出でき、(b) は抽出できません。論文では (a) のように文字抽出が可能な PDF が理想です．
-
-<figure id="fig:figure_comparison2">
-<figure id="subfig:figcomp2_pdf">
-<img src="/TUS-ME_thesis_template_manual/manual/images/comparison2-1.png" alt="カラーマップをラスター、文字をベクターにしたPDF" />
-<figcaption>PDF ファイル．</figcaption>
-</figure>
-<figure id="subfig:figcomp2_png">
-<img src="/TUS-ME_thesis_template_manual/manual/images/comparison2-2.png" alt="全体をラスター化したPNG" />
-<figcaption>PNG ファイル．</figcaption>
-</figure>
-<figcaption>ファイルサイズが大きい画像の比較．</figcaption>
-</figure>
-
-ただし，全ての画像をベクター画像にするのは難しい場合もあります．前の比較はファイルサイズの小さいカラーマップでしたが、複雑な模様をすべてベクター化するとファイルが非常に重くなります。上のパネル (a) はカラーマップだけをラスター、文字をベクターにした PDF なので文字抽出が可能です。(b) は全体をラスター化した PNG なので文字抽出できません。(a) の作成には少し技術を要するため、重い画像では (b) のようなラスター画像を使っても構いません．
+ただし，全ての画像をベクター画像にするのは難しい場合もあります．
+前の比較はファイルサイズの小さいカラーマップでしたが、複雑な模様をすべてベクター化するとファイルが非常に重くなります．
+このため，重い画像ではラスター画像を使うこともあります．
 
 ### 画像の省略によるタイプセットの高速化
 
-挿入する画像の枚数が増えると，その分タイプセットにかかる時間も増えていきます． 学位論文くらいの長さになるとタイプセットに 1, 2 分程度かかるのは覚悟しておきましょう． 先生や先輩に添削をお願いする際や提出時はもちろん全ての図が PDF ファイルに貼り付けてある状態でないといけませんが，自分で文章を書き進めている段階では図の配置さえわかっていれば問題ないことも多いです． メイン文書である `main.tex` の冒頭の `\documentclass` は文書の主要な構造とレイアウトを決定する命令です． このテンプレートを使用している皆さんが `\documentclass` を書き換える場面は基本的にありませんが，オプションの最終行にある `draft` に注目してください． この `draft` オプションを有効化する（コメントアウトを外す）と，出力する PDF ファイル中の画像が全て省略され，枠のみの表示となります． このように画像を省略することでタイプセットを高速化できます． 画像の挿入は省略しても，画像の配置やサイズ自体は表現できるのでレイアウトが崩れるといった心配もありません． 他人に見せる用ではなく，ただ文章を書き進めているだけの段階では `draft` を有効化することをおすすめします． ただし，添削時や提出時に `draft` をコメントアウトすることを忘れないようにしてください．
+挿入する画像の枚数が増えると，その分タイプセットにかかる時間も増えていきます．
+学位論文くらいの長さになるとタイプセットに 1, 2 分程度かかるのは覚悟しておきましょう（Typstは非常に高速なので，タイプセット時間をほとんど意識せずに書くことができます！）．
+先生や先輩に添削をお願いする際や提出時はもちろん全ての図が PDF ファイルに貼り付けてある状態でないといけませんが，自分で文章を書き進めている段階では図の配置さえわかっていれば問題ないことも多いです．
+メイン文書である `main.tex` の冒頭の `\documentclass` は文書の主要な構造とレイアウトを決定する命令です．
+このテンプレートを使用している皆さんが `\documentclass` を書き換える場面は基本的にありませんが，オプションの最終行にある `draft` に注目してください．
+この `draft` オプションを有効化する（コメントアウトを外す）と，出力する PDF ファイル中の画像が全て省略され，枠のみの表示となります．
+このように画像を省略することでタイプセットを高速化できます．
+画像の挿入は省略しても，画像の配置やサイズ自体は表現できるのでレイアウトが崩れるといった心配もありません．
+他人に見せる用ではなく，ただ文章を書き進めているだけの段階では `draft` を有効化することをおすすめします．
+ただし，添削時や提出時に `draft` をコメントアウトすることを忘れないようにしてください．
+
+:::note[Typstの場合]
+Typstでは現在，`draft`オプションのような機能はありません．
+しかし，Typstは非常に高速でタイプセットが可能なため，画像の省略を意識する必要はほとんどありません．
+:::
 
 ## 表の配置
 
-次に表の作り方を説明します． 正直，LaTeX 環境での表作成は少々面倒です． 特に表のセルの数が多くなると行をいくつも増やさなければいけないのでかなりの労力がかかります． 簡単に LaTeX の表を作ってくれるツールとして，Tables Generator[^4] があります． また，[2023 年 9 月 27 日に Overleaf に入ったアップデート](https://www.overleaf.com/blog/major-feature-news-add-and-edit-tables-without-writing-code)で直感的な表の作成が可能になりました． Overleaf の表作成機能はかなり便利なので，ローカルで LaTeX 文書を書いているときに表作成時だけでも Overleaf を立ち上げるとストレス無く表を作れます．
+次に表の作り方を説明します．
+正直，LaTeX・Typst 環境での表作成は少々面倒です．
+特に表のセルの数が多くなると行をいくつも増やさなければいけないのでかなりの労力がかかります．
+簡単に LaTeX の表を作ってくれるツールとして，[Tables Generator](https://www.tablesgenerator.com/)があります（Typst表も生成できるツールとしては，[LaTeX Tables](https://www.latex-tables.com/)があります）．
+また，[2023 年 9 月 27 日に Overleaf に入ったアップデート](https://www.overleaf.com/blog/major-feature-news-add-and-edit-tables-without-writing-code)で直感的な表の作成が可能になりました．
+Overleaf の表作成機能はかなり便利なので，ローカルで LaTeX 文書を書いているときに表作成時だけでも Overleaf を立ち上げるとストレス無く表を作れます．
 
-ここでは `tabular` 環境を用いた表作成の方法と `tblr` 環境を用いた表作成の方法の両方を記載します． `tabular` 環境は古くから存在している表作成の方法ですが，カスタマイズ性が低く，非常に使いにくいです． しかし，`tabularray` パッケージ[^5]でサポートされている `tblr` 環境は非常にカスタマイズ性が高く，`tabular` 環境で非常に難しかったセル結合も容易に行えます． `tabluar` 環境は現在でも広く使われているためこのテンプレートでも説明しますが，皆さんが論文を書くときは是非 `tblr` 環境を使ってみてください．
+<Tabs>
+<TabItem label="LaTeX">
 
-### `tabular` 環境を用いた表
+ここでは `tabular` 環境を用いた表作成の方法と `tblr` 環境を用いた表作成の方法の両方を記載します．
+`tabular` 環境は古くから存在している表作成の方法ですが，カスタマイズ性が低く，非常に使いにくいです．
+しかし，`tabularray` パッケージ[^5]でサポートされている `tblr` 環境は非常にカスタマイズ性が高く，`tabular` 環境で非常に難しかったセル結合も容易に行えます．
+`tabluar` 環境は現在でも広く使われているためこのテンプレートでも説明しますが，皆さんが論文を書くときは是非 `tblr` 環境を使ってみてください．
 
-<div id="table:tabular">
-
-| 学会名         |   会員種別   |                     年会費 |
-|:---------------|:------------:|---------------------------:|
-| 実在する学会   |              |                            |
-| 日本機械学会   |    学生員    |                   4,800 円 |
-| 日本流体力学会 |   学生会員   |                   5,000 円 |
-| 日本伝熱学会   |   学生会員   |                   4,000 円 |
-| 実在しない学会 |              |                            |
-| 日本架空学会   |  小学生会員  |              $-8,000$ 円 |
-|                |  中高生会員  |              $-5,000$ 円 |
-|                |  大学生会員  |              $-2,000$ 円 |
-|                | 名誉学生会員 | $6.02 \times 10^{23}$ 円 |
-
-表のサンプル（`tabular` 環境を使用）．
-
-</div>
-
-<details>
-<summary><code>tabular</code>環境の完全なコード</summary>
+<Tabs>
+<TabItem label="tabular環境">
 
 ```latex
 \begin{table}[tp]
@@ -333,35 +725,51 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
     \caption{表のサンプル（\texttt{tabular} 環境を使用）．}
     \label{table:tabular}
     \begin{tabular}{l|c|r} \hline\hline
-        \multicolumn{1}{c|}{学会名} & 会員種別 & \multicolumn{1}{c}{年会費} \\ \hline
+        \multicolumn{1}{c|}{学会名}  & 会員種別  & \multicolumn{1}{c}{年会費} \\ \hline
         \multicolumn{3}{c}{実在する学会} \\ \hline
-        日本機械学会 & 学生員 & 4,800 円 \\ \hline
-        日本流体力学会 & 学生会員 & 5,000 円 \\ \hline
-        日本伝熱学会 & 学生会員 & 4,000 円 \\ \hline
+        日本機械学会    & 学生員    & 4,800 円 \\ \hline
+        日本流体力学会  & 学生会員  & 5,000 円 \\ \hline
+        日本伝熱学会    & 学生会員  & 4,000 円 \\ \hline
         \multicolumn{3}{c}{実在しない学会} \\ \hline
-        \multirow{4}{*}{日本架空学会} & 小学生会員 & $-8,000$ 円 \\ \cline{2-3}
-        & 中高生会員 & $-5,000$ 円 \\ \cline{2-3}
-        & 大学生会員 & $-2,000$ 円 \\ \cline{2-3}
-        & 名誉学生会員 & $6.02 \times 10^{23}$ 円 \\ \hline
+        \multirow{4}{*}{日本架空学会}& 小学生会員  & $-8,000$ 円 \\ \cline{2-3}
+        & 中高生会員  & $-5,000$ 円 \\ \cline{2-3}
+        & 大学生会員  & $-2,000$ 円 \\ \cline{2-3}
+        & 名誉学生会員  & $6.02 \times 10^{23}$ 円 \\ \hline
     \end{tabular}
 \end{table}
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/table-example-latex1.png)
+</Card>
 
-</details>
+表を作成するときは `table` 環境の中に `tabular` 環境を作ります．
+`table` 環境は，表やキャプション，ラベルを全て含めた表全体の制御を行い，`tabular` 環境は表の各セルの制御を行います．
+`table` 環境では `figure` 環境と同様，`h`, `t`, `b`, `p`, `H` による位置制御を行います．
+図の場合はキャプションを下に付けますが，表の場合はキャプションを上に付けます．
+`tabular` 環境内でセルの文字揃え位置制御は `lcr` で行います．
 
-日本機械学会が推奨する表形式を満たしたサンプルを表 1.1 に示します． 具体的なコードは `figure_table.tex` 内の表 1.1 の該当箇所を確認してください． 表を作成するときは `table` 環境の中に `tabular` 環境を作ります． `table` 環境は，表やキャプション，ラベルを全て含めた表全体の制御を行い，`tabular` 環境は表の各セルの制御を行います． `table` 環境では `figure` 環境と同様，`h`, `t`, `b`, `p`, `H` による位置制御を行います． 図の場合はキャプションを下に付けますが，表の場合はキャプションを上に付けます． `tabular` 環境内でセルの文字揃え位置制御は `lcr` で行います．
+- `l`：左揃え（**l**eft）
+- `c`：中央揃え（**c**enter）
+- `r`：右揃え（**r**ight）
 
-- `l`左揃え（**l**eft）
+上記の場合は `{l|c|r}` としています．
+この場合，左の列から左寄せ・中央寄せ・右寄せになります．
+縦棒（バーティカルライン）`|` は表の縦罫線を入れる場所を示しています．
+この場合，1 列目と 2 列目の間，2 列目と 3 列目の間に縦罫線を入れます．
+行の区切りは `\\`，列の区切りは `&` です． 横罫線を引くときは `\hline` を使います．
+日本機械学会のテンプレートの表では一番上の横罫線は 2 本なので `\hline\hline` としています．
 
-- `c`中央揃え（**c**enter）
-
-- `r`右揃え（**r**ight）
-
-表 1.1 の場合は `{l|c|r}` としています． この場合，左の列から左寄せ・中央寄せ・右寄せになります． 縦棒（バーティカルライン）``\| は表の縦罫線を入れる場所を示しています． この場合，1 列目と 2 列目の間，2 列目と 3 列目の間に縦罫線を入れます． 行の区切りは `\\`，列の区切りは `&` です． 横罫線を引くときは `\hline` を使います． 日本機械学会のテンプレートの表では一番上の横罫線は 2 本なので `\hline\hline` としています．
-
-次に表のセル結合について説明します． 行方向のセル結合を行う際は `\multicolumn{結合する列数}{揃え位置}{セルの中身}` を使います（結合するセルは列）． 表 1.1 の 2 行目で使用している `\multicolumn{3}{c}{実在する学会}` は「横並びの 3 つのセルを結合し，『実在する学会』という文字列を中央揃えで配置する」命令です． 1 行 1 列目では `\multicolumn{1}{c|}{学会名}` としていますが，これは本来左揃えになっている 1 列目を，このセルだけ例外的に中央揃えにするために使用しています． 面白い使い方ですね． 列方向のセル結合を行う際は `\multirow{結合する行数}{幅}{セルの中身}` を使います（結合するセルは行）． 表 1.1 の 7 行 1 列目で使用している `\multirow{4}{*}{日本架空学会}` は「縦並びの 4 つのセルを結合し，『日本架空学会』という文字列を幅指定なしで配置する」命令です． 列方向のセル結合を行う際は横罫線を消す必要があります． `\cline{x-y}` という命令を使うと，x 列目から y 列目に横罫線を入れるコマンドです． `\hline` がその行全体に横罫線を入れるのに対して `\cline{}` はその行に部分的な横罫線を入れるコマンドです． 横罫線を消すことでセル結合したような出力を得られます．
-
-<div class="tcolorbox">
+次に表のセル結合について説明します．
+行方向のセル結合を行う際は `\multicolumn{結合する列数}{揃え位置}{セルの中身}` を使います（結合するセルは列）．
+上の例の 2 行目で使用している `\multicolumn{3}{c}{実在する学会}` は「横並びの 3 つのセルを結合し，『実在する学会』という文字列を中央揃えで配置する」命令です．
+1 行 1 列目では `\multicolumn{1}{c|}{学会名}` としていますが，これは本来左揃えになっている 1 列目を，このセルだけ例外的に中央揃えにするために使用しています．
+面白い使い方ですね．
+列方向のセル結合を行う際は `\multirow{結合する行数}{幅}{セルの中身}` を使います（結合するセルは行）．
+上の例の 7 行 1 列目で使用している `\multirow{4}{*}{日本架空学会}` は「縦並びの 4 つのセルを結合し，『日本架空学会』という文字列を幅指定なしで配置する」命令です．
+列方向のセル結合を行う際は横罫線を消す必要があります．
+`\cline{x-y}` という命令を使うと，x 列目から y 列目に横罫線を入れるコマンドです．
+`\hline` がその行全体に横罫線を入れるのに対して `\cline{}` はその行に部分的な横罫線を入れるコマンドです．
+横罫線を消すことでセル結合したような出力を得られます．
 
 |                                                    |                        |
 |:---------------------------------------------------|:-----------------------|
@@ -369,26 +777,11 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
 | `\multirow{結合する行数}{幅}{セルの中身}`          | 行のセル結合           |
 | `\cline{start-end}`                                | 一部の横罫線のみを表示 |
 
-</div>
+また，表の中では数式を使用することも可能です．
+やりがちなミスとして，負の数をセルに入れるときに数式環境 `$$` に入れ忘れて，マイナスがハイフンとなって出力されているものがあります[^6]．
 
-また，表の中では数式を使用することも可能です． やりがちなミスとして，負の数をセルに入れるときに数式環境 `$$` に入れ忘れて，マイナスがハイフンとなって出力されているものがあります[^6]．
-
-### `tblr` 環境を用いた表
-
-| 学会名 | 会員種別 | 年会費 |
-|---|:---:|---:|
-| **実在する学会** |||
-| 日本機械学会 | 学生員 | 4,800 円 |
-| 日本流体力学会 | 学生会員 | 5,000 円 |
-| 日本伝熱学会 | 学生会員 | 4,000 円 |
-| **実在しない学会** |||
-| 日本架空学会 | 小学生会員 | -8,000 円 |
-|  | 中高生会員 | -5,000 円 |
-|  | 大学生会員 | -2,000 円 |
-|  | 名誉学生会員 | 6.02 × 10²³ 円 |
-
-<details>
-<summary><code>tblr</code>環境の完全なコード</summary>
+</TabItem>
+<TabItem label="tblr環境">
 
 ```latex
 \begin{table}[tp]
@@ -396,29 +789,34 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
     \caption{表のサンプル（\texttt{tblr} 環境を使用）．}
     \label{table:tblr}
     \begin{tblr}{
-        colspec = {l|c|r},
-        hlines,
-        % vlines,
+        colspec = {l|c|r},  % 文字の揃え位置制御
+        hlines,             % 横罫線の表示
+        % vlines,             % 縦罫線の表示
     } \hline
-        \SetCell{c} 学会名 & 会員種別 & \SetCell{c} 年会費 \\
-        \SetCell[c=3]{c} 実在する学会 & & \\
-        日本機械学会 & 学生員 & 4,800 円 \\
-        日本流体力学会 & 学生会員 & 5,000 円 \\
-        日本伝熱学会 & 学生会員 & 4,000 円 \\
-        \SetCell[c=3]{c} 実在しない学会 & & \\
-        \SetCell[r=4]{l} 日本架空学会 & 小学生会員 & $-8,000$ 円 \\
-        & 中高生会員 & $-5,000$ 円 \\
-        & 大学生会員 & $-2,000$ 円 \\
-        & 名誉学生会員 & $6.02 \times 10^{23}$ 円 \\
+        \SetCell{c} 学会名  & 会員種別      & \SetCell{c} 年会費 \\
+        \SetCell[c=3]{c} 実在する学会   &   &   \\
+        日本機械学会       & 学生員        & 4,800 円 \\
+        日本流体力学会     & 学生会員      & 5,000 円 \\
+        日本伝熱学会       & 学生会員      & 4,000 円 \\
+        \SetCell[c=3]{c} 実在しない学会   &   &   \\
+        \SetCell[r=4]{l} 日本架空学会   & 小学生会員    & $-8,000$ 円 \\
+        & 中高生会員    & $-5,000$ 円 \\
+        & 大学生会員    & $-2,000$ 円 \\
+        & 名誉学生会員  & $6.02 \times 10^{23}$ 円 \\
     \end{tblr}
 \end{table}
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/table-example-latex1.png)
+</Card>
 
-</details>
-
-表 tblrの表 は `tblr` 環境を用いた表のサンプルです． 見た目が表 1.1 と同じになるようにしています． 基本的な使い方は `tabular` 環境に準じています． 大きな違いは罫線の扱いです． `\begin{tblr}` の直後で `hlines` を入れると全ての横罫線が，`vlines` を入れると全ての縦罫線が表示されます． また，セル結合の方法も異なります． 表 tblrの表 の 2 行目の `\SetCell[c=3]{c} 実在する学会` は「横並びの 3 つのセルを結合し，『実在する学会』という文字列を中央揃えで配置する」命令です． 1 行 1 列目では `\SetCell{c} 学会名` とすることでこのセルだけ中央揃えに変えています． 7 行 1 列目の `\SetCell[r=4]{l} 日本架空学会` は「縦並びの 4 つのセルを結合し，『日本架空学会』という文字列を左揃えで配置する」命令です．
-
-<div class="tcolorbox">
+上記の表 は `tblr` 環境を用いた表のサンプルです．
+基本的な使い方は `tabular` 環境に準じています．
+大きな違いは罫線の扱いです．
+`\begin{tblr}` の直後で `hlines` を入れると全ての横罫線が，`vlines` を入れると全ての縦罫線が表示されます．
+また，セル結合の方法も異なります．
+表 tblrの表 の 2 行目の `\SetCell[c=3]{c} 実在する学会` は「横並びの 3 つのセルを結合し，『実在する学会』という文字列を中央揃えで配置する」命令です． 1 行 1 列目では `\SetCell{c} 学会名` とすることでこのセルだけ中央揃えに変えています．
+7 行 1 列目の `\SetCell[r=4]{l} 日本架空学会` は「縦並びの 4 つのセルを結合し，『日本架空学会』という文字列を左揃えで配置する」命令です．
 
 |                        |                               |
 |:-----------------------|:------------------------------|
@@ -427,23 +825,50 @@ LaTeX で図や表を挿入するときのコマンドは初心者には覚え�
 | `\SetCell[c=3]{c}`     | 3 列をセル結合し中央揃え      |
 | `\SetCell[r=2,c=3]{c}` | 2 行 3 列をセル結合し中央揃え |
 
-</div>
+</TabItem>
+</Tabs>
+</TabItem>
+<TabItem label="Typst">
 
-<div class="tcolorbox">
+表を挿入するには，`fig`関数の中に`tblr`関数を入れることで実現できます．
+以下は，学会の年会費一覧を表にした例です．
 
-- 奥村晴彦, 黒木裕介,［改訂第 9 版］LaTeX 美文書作成入門, 技術評論社 (2023), pp. 117–126, 135–149.
+```typst
+#fig(
+  tblr(
+    columns: 3,
+    align: (left, center, right),
+    align(center)[学会名], align(center)[会員種別], align(center)[年会費], table.hline(),
+    table.cell(colspan: 3, align: center)[実在する学会], table.hline(),
+    [日本機械学会], [学生員], [$4800$円],
+    [日本流体力学会], [学生会員], [$5000$円],
+    [日本伝熱学会], [学生会員], [$4000$円], table.hline(),
+    table.cell(colspan: 3, align: center)[実在しない学会], table.hline(),
+    table.cell(rowspan: 4, align: horizon)[日本架空学会],
+    [小学生会員], [$-8000$円],
+    [中高生会員], [$-8000$円],
+    [大学生会員], [$-8000$円],
+    [名誉学生会員], [$6.02 times 10^23$円],
+  ),
+  caption: [学会の年会費一覧],
+  label: <table:学会の年会費一覧>,
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/manual/images/table-example-typst1.png)
+</Card>
 
-- 吉永徹美, LaTeX2ε 辞典 増補改訂版, 翔泳社 (2018), pp. 238–274.
+Typstの組込み関数である`table`関数も使用できますが，本テンプレートで実装した`tblr`関数を使用すると，機械学会の論文フォーマットに近い表を簡単に作成できます．
+より詳しい使い方は，Typstの公式ドキュメントの[Table Guide](https://typst.app/docs/guides/tables/)を参照してください．
 
-</div>
+</TabItem>
+</Tabs>
 
-[^1]: ただし，章の始まりのページ（たとえば今見ているこのページ）に図を配置する際は「第 n 章」の文字列の上に図があると不自然です．この場合に限り，図をページの下部または章題目の下に配置するのがよいでしょう．文章の間に図が入ることのないように注意．
+[^1]: ただし，章の始まりのページに図を配置する際は「第n章」の文字列の上に図があると不自然です．この場合に限り，図をページの下部または章題目の下に配置するのがよいでしょう．文章の間に図が入ることのないように注意．
 
 [^2]: 図などを中央寄せする際に `\begin{center}` で始まる `center` 環境を使うのは非推奨です．
 
 [^3]: `subfigure` や `subfig` は古いので非推奨です．
-
-[^4]: [Tables Generator](https://www.tablesgenerator.com/)
 
 [^5]: LaTeX3 を利用した新しいパッケージです．
 
