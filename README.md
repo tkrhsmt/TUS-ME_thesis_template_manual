@@ -9,11 +9,11 @@
 
 ## 公開サイト・関連リポジトリ
 
-- [マニュアルを読む](https://tkrhsmt.github.io/TUS-ME_thesis_template_manual/)
+- [マニュアルを読む](https://tsukahara-lab.github.io/TUS-ME_thesis_template_manual/)
 - [LaTeX テンプレート](https://github.com/tsukahara-lab/TUS-ME_thesis_template)
 - [Typst テンプレート](https://github.com/tsukahara-lab/TUS-ME_thesis_typst_template)
 
-テンプレートの使い方については、まず公開サイトの[はじめに](https://tkrhsmt.github.io/TUS-ME_thesis_template_manual/manual/introduction/)と[環境構築・操作方法](https://tkrhsmt.github.io/TUS-ME_thesis_template_manual/manual/howtouse/)を参照してください。
+テンプレートの使い方については、まず公開サイトの[はじめに](https://tsukahara-lab.github.io/TUS-ME_thesis_template_manual/manual/introduction/)と[環境構築・操作方法](https://tsukahara-lab.github.io/TUS-ME_thesis_template_manual/manual/howtouse/)を参照してください。
 
 ## このリポジトリについて
 
