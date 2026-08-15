@@ -1,0 +1,22 @@
+---
+title: \\tableofcontents
+description: テンプレート形式の目次を出力する
+---
+
+## 構文
+
+```latex
+\tableofcontents
+```
+
+## 説明
+
+標準の `\tableofcontents` をテンプレート用に再定義したコマンドです。「目次」の番号なし章を出力して `.toc` を読み込み、目次ページのページスタイルを空にします。
+
+通常は `\makecover` の直後、`\signary` の前に置きます。
+
+```latex
+\makecover
+\tableofcontents
+\signary
+```

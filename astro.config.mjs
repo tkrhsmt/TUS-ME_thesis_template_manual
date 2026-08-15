@@ -31,6 +31,10 @@ export default defineConfig({
 					label: 'テンプレートマニュアル',
 					items: [{ autogenerate: { directory: 'manual' } }],
 				},
+				{
+					label: 'テンプレート API',
+					items: [{ autogenerate: { directory: 'api' } }],
+				},
 			],
 		}),
 	],

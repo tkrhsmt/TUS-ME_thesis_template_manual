@@ -1,0 +1,19 @@
+---
+title: \\linesperpage
+description: 修論要旨の 1 ページ当たり行数を設定する
+---
+
+## 構文
+
+```latex
+\linesperpage{行数}
+```
+
+## 説明
+
+修論要旨の `settings_master.sty` だけが提供するコマンドです。本文領域の高さを指定行数で割り、ベースライン間隔を設定します。`\mojiperline` と続けて、本文前に使用します。
+
+```latex
+\mojiperline{35}
+\linesperpage{30}
+```

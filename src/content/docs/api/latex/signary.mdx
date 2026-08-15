@@ -1,0 +1,21 @@
+---
+title: \\signary
+description: 記号表を開始する
+---
+
+## 構文
+
+```latex
+\signary
+```
+
+## 説明
+
+記号表の直前で実行します。改ページ後に「記号表」の番号なし章を作り、目次へ追加し、ページ番号をローマ数字の 1 から振り直します。記号表専用のページスタイルも設定します。
+
+```latex
+\signary
+\input{chapter/signary.tex}
+```
+
+記号表の後、本文開始前には `\clearpage`、`\pagestyle{normal}`、`\setcounter{page}{0}`、`\pagenumbering{arabic}` をテンプレート例どおりに記述します。

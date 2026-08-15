@@ -1,0 +1,18 @@
+---
+title: fig
+description: 論文用の図配置を行う
+---
+
+## 構文
+
+```typst
+#fig(..arg, label: none, placement: auto)
+```
+
+## 説明
+
+標準 `figure` の可変引数 `..arg` を受け取り、図の高さ、章先頭かどうか、現在位置を基に配置を決めます。`placement` は既定の `auto`、`top`、`bottom`、それ以外（単独ページ）を指定できます。`label` は図の後ろに付与されます。
+
+```typst
+#fig(image("figure/image.svg", width: 70%), caption: [説明], label: <fig:sample>)
+```

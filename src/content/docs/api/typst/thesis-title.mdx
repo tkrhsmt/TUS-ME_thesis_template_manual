@@ -1,0 +1,16 @@
+---
+title: thesis_title
+description: 学位論文の表紙を出力する
+---
+
+## 構文
+
+```typst
+#thesis_title(title: [タイトル], year: "2025", master: false, month: "2", institution: none, laboratory: [〇〇], authors: ((student-id: "75*****", name: "機械　工作"),))
+```
+
+## 引数
+
+`title` は題目、`year` は年度、`master` は修論なら `true`、`month` は提出月です。`institution` を省略すると学位種別に応じた所属名を自動出力します。`laboratory` の末尾には「研究室」が加わります。`authors` は `student-id` と `name` を持つ配列です。
+
+年度と学籍番号は表紙上で全角に変換されます。関数の後にページ設定を戻すため、表紙は本文より前に置いてください。

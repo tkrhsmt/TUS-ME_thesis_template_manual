@@ -1,0 +1,22 @@
+---
+title: \\biblist
+description: 文献一覧を開始する
+---
+
+## 構文
+
+```latex
+\biblist
+```
+
+## 説明
+
+文献一覧の直前で実行します。改ページし、文献用の柱・ノンブルを設定して目次に「文献」を追加します。また、文献内の URL をローマン体で表示する設定を有効にします。
+
+```latex
+\biblist
+\bibliographystyle{jsme}
+\bibliography{mybib_en.bib,mybib_jp.bib}
+```
+
+これは `\bibliography` の代わりではありません。必ず続けて標準の BibTeX コマンドを記述してください。

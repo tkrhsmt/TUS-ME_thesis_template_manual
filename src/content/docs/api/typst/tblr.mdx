@@ -1,0 +1,14 @@
+---
+title: tblr
+description: 論文形式の表を出力する
+---
+
+## 構文
+
+```typst
+#tblr(..body, columns: auto, rows: auto, gutter: auto, column-gutter: auto, row-gutter: auto, align: auto, fill: none, stroke: auto, inset: 0% + 5pt)
+```
+
+## 説明
+
+`table` の主要引数を受け取り、テンプレート規定の罫線とセル余白を設定します。先頭に列をまたぐ空セルを加えるため、表頭の罫線を適切に出力できます。`stroke: auto` は既定の横罫線形式です。

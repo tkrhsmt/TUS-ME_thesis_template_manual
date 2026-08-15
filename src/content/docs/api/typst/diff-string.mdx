@@ -1,0 +1,12 @@
+---
+title: diff-string
+description: 二つの文字列を差分表示する
+---
+
+## 構文
+
+```typst
+#diff-string(a, b, format-plus: x => text(x, fill: blue, weight: "bold"), format-minus: x => strike(text(x, fill: red, size: 0.75em)))
+```
+
+`style/diff-doc/lib.typ` から import します。`a` と `b` の文字列を比較し、追加部分を `format-plus`、削除部分を `format-minus` で組版します。既定では追加を青太字、削除を赤の取り消し線にします。

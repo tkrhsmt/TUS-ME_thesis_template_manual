@@ -1,0 +1,12 @@
+---
+title: diff-content
+description: 二つの content を差分表示する
+---
+
+## 構文
+
+```typst
+#diff-content(a, b, format-plus: ..., format-minus: ...)
+```
+
+`style/diff-doc/lib.typ` の関数です。古い content `a` と新しい content `b` のテキストを比較し、新しい content の書式をできるだけ維持して差分を出力します。追加・削除の既定の見た目は `diff-string` と同じです。

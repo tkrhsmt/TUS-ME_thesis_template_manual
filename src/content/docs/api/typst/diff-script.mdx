@@ -1,0 +1,14 @@
+---
+title: diff.sh
+description: Git の過去版と現在の Typst ファイルの差分 PDF を作る
+---
+
+## 構文
+
+```bash
+bash diff.sh <ファイル> <コミットハッシュ>
+```
+
+## 説明
+
+指定コミットからファイルを一時展開し、現在のファイルと比較した `diff.pdf` を作成します。例は `bash diff.sh main.typ HEAD~1` です。実行には Git、Typst、`tar` が必要です。スクリプトは一時ディレクトリ `.diff` と `diff.typ` を作成し、完了時に削除します。

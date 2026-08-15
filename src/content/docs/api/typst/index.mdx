@@ -1,0 +1,26 @@
+---
+title: Typst API
+description: Typst 学位論文テンプレート独自関数の一覧
+sidebar:
+  order: -1
+---
+
+`#import "style/thesis_style.typ": *`（要旨では対応する `abst_*_style.typ`）で読み込むテンプレート固有 API です。関数ごとに構文、引数、既定値、挙動、例を記載しています。
+
+## 本文
+
+- [`thesis_init`](./thesis-init/)、[`thesis_title`](./thesis-title/)、[`outline-page`](./outline-page/)
+- [`thesis_signary`](./thesis-signary/)、[`thesis_main`](./thesis-main/)、[`thesis-appendix`](./thesis-appendix/)
+- [`check-contents`](./check-contents/)、[`comment`](./comment/)
+
+## 図表・表記
+
+- [`fig`](./fig/)、[`tblr`](./tblr/)、[`signary-list`](./signary-list/)
+- [`number-to-zenkaku`](./number-to-zenkaku/)、[`zenkaku-to-number`](./zenkaku-to-number/)、[`linebreak_num`](./linebreak-num/)
+- [`nonumber`](./nonumber/)、[`LaTeX`](./latex-logo/)、[無次元数定数](./dimensionless-numbers/)、[スタイル定数](./style-constants/)
+
+## 要旨・差分
+
+- [`abst_init`](./abst-init/)、[`abst_title`](./abst-title/)、[`abst_title_en`](./abst-title-en/)
+- [`spacing-body`](./spacing-body/)、[`make-space-character`](./make-space-character/)
+- [`diff-string`](./diff-string/)、[`diff-content`](./diff-content/)、[差分スクリプト](./diff-script/)

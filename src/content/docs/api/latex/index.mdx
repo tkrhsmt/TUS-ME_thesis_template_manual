@@ -1,0 +1,33 @@
+---
+title: LaTeX API
+description: LaTeX 学位論文テンプレート独自コマンドの一覧
+sidebar:
+  order: -1
+---
+
+`\usepackage{settings}` で読み込む本文用スタイルと、要旨用スタイルが提供する独自コマンドです。各コマンドの詳細はリンク先を参照してください。
+
+## 表紙
+
+- [`\thesis`](./thesis/) — 年度と学位種別
+- [`\title`](./title/) — 論文題目
+- [`\date`](./date/) — 提出年月
+- [`\affiliation`](./affiliation/) — 所属
+- [`\laboratory`](./laboratory/) — 研究室名
+- [`\author`](./author/) — 著者情報
+- [`\coworker`](./coworker/)、[`\supervisor`](./supervisor/)、[`\cosupervisor`](./cosupervisor/) — 保持用の表紙情報
+- [`\makecover`](./makecover/) — 表紙を出力
+
+## 本文の構成
+
+- [`\signary`](./signary/) — 記号表
+- [`\acknowledge`](./acknowledge/) — 謝辞
+- [`\biblist`](./biblist/) — 文献一覧
+- [`\tableofcontents`](./tableofcontents/) — テンプレート用目次
+
+## 表記と要旨
+
+- [`\citep`](./citep/) と [`\citepe`](./citepe/) — 和文・英文用の括弧付き引用
+- [無次元数・表記コマンド](./notation-commands/) — `\Gr` など全 12 個
+- [表示名・ページスタイル](./display-settings/) — 見出し、図表接頭辞、ページスタイル
+- [`\mojiperline`](./mojiperline/) と [`\linesperpage`](./linesperpage/) — 修論要旨の文字数・行数設定

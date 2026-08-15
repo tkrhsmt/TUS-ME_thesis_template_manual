@@ -1,0 +1,24 @@
+---
+title: \\makecover
+description: 設定済みの情報から表紙を出力する
+---
+
+## 構文
+
+```latex
+\makecover
+```
+
+## 説明
+
+`\thesis`、`\title`、`\date`、`\affiliation`、`\laboratory`、`\author` の値を使って表紙を組版します。表紙はページ番号なしで出力され、続けて空のページを挿入します。
+
+```latex
+% 表紙情報を設定した後
+\makecover
+\tableofcontents
+```
+
+:::caution
+必要な情報を設定する前に実行すると、未定義の内部値を出力しようとしてエラーになることがあります。
+:::
