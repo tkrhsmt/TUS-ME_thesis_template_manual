@@ -3,12 +3,24 @@ title: outline-page
 description: テンプレート形式の目次を出力する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+テンプレート形式の目次を出力するための関数
+
 ## 構文
 
 ```typst
 #outline-page
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/outline-page-typst.png)
+</Card>
+
+## パラメータ
+
+なし
 
 ## 説明
 
-章を「第 n 章」、付録を「付録 A」として表示し、見出し・ページ番号へリンクを設定した目次を出力します。表紙の後、記号表の前に記述します。引数はありません。
+章を「第 n 章」，付録を「付録 A」として表示し，見出し・ページ番号へリンクを設定した目次を出力します．
+表紙の後，記号表の前に記述します．

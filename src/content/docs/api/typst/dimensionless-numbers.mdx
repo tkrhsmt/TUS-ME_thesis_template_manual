@@ -3,14 +3,83 @@ title: 無次元数定数
 description: local_function.typ が提供する数式組版済み定数
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
 ## 使用方法
 
-数式モードで組版済みの content 値です。`#Re` のように呼び出します。
+数式モードで組版済みの content 値です．
+`#Re` のように呼び出します．
 
 ```typst
-レイノルズ数は #Re、ヌセルト数は #Nu とする。
+レイノルズ数は #Re，ヌセルト数は #Nu とする．
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/dimensionless-numbers-typst1.png)
+</Card>
+
+或いは，数式モード中では自然に組版されます．
+
+```typst
+$
+    Re = (rho v L)/mu, quad Nu = (h L)/k
+$
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/dimensionless-numbers-typst2.png)
+</Card>
 
 ## 全定数
 
-`Ar`, `As`, `Be`, `Bm`, `Bi`, `Bo`, `Br`, `Ca`, `Da`, `Cf`, `Cl`, `Cd`, `Cp`, `De`, `Ec`, `Ek`, `Er`, `Eu`, `Fr`, `Ga`, `Gz`, `Gr`, `Ha`, `Hg`, `Ir`, `Ka`, `Kn`, `Ku`, `La`, `Le`, `Ma`, `Mg`, `Mo`, `Nu`, `Oh`, `Pe`, `Pr`, `Ra`, `Re`, `Ri`, `Ro`, `Sc`, `Sh`, `St`, `Stk`, `Ta`, `Wea`, `We`, `Wi`。
+Typstテンプレートで定義されている無次元数定数は以下の通りです．
+
+| **定数** | **組版済み** |
+|:---|:---|
+| `Ar` | $Ar$ |
+| `As` | $As$ |
+| `Be` | $Be$ |
+| `Bm` | $Bm$ |
+| `Bi` | $Bi$ |
+| `Bo` | $Bo$ |
+| `Br` | $Br$ |
+| `Ca` | $Ca$ |
+| `Da` | $Da$ |
+| `Cf` | $Cf$ |
+| `Cl` | $Cl$ |
+| `Cd` | $Cd$ |
+| `Cp` | $Cp$ |
+| `De` | $De$ |
+| `Ec` | $Ec$ |
+| `Ek` | $Ek$ |
+| `Er` | $Er$ |
+| `Eu` | $Eu$ |
+| `Fr` | $Fr$ |
+| `Ga` | $Ga$ |
+| `Gz` | $Gz$ |
+| `Gr` | $Gr$ |
+| `Ha` | $Ha$ |
+| `Hg` | $Hg$ |
+| `Ir` | $Ir$ |
+| `Ka` | $Ka$ |
+| `Kn` | $Kn$ |
+| `Ku` | $Ku$ |
+| `La` | $La$ |
+| `Le` | $Le$ |
+| `Ma` | $Ma$ |
+| `Mg` | $Mg$ |
+| `Mo` | $Mo$ |
+| `Nu` | $Nu$ |
+| `Oh` | $Oh$ |
+| `Pe` | $Pe$ |
+| `Pr` | $Pr$ |
+| `Ra` | $Ra$ |
+| `Re` | $Re$ |
+| `Ri` | $Ri$ |
+| `Ro` | $Ro$ |
+| `Sc` | $Sc$ |
+| `Sh` | $Sh$ |
+| `St` | $St$ |
+| `Stk` | $St_k$ |
+| `Ta` | $Ta$ |
+| `Wea` | $Wea$ |
+| `We` | $We$ |
+| `Wi` | $Wi$ |

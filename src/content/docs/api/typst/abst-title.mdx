@@ -3,10 +3,127 @@ title: abst_title
 description: 要旨の和文題目・著者欄を出力する
 ---
 
+要旨の和文題目・著者欄を出力するための関数
+
+import { Tabs, TabItem, Card } from '@astrojs/starlight/components';
+
 ## 構文
 
-卒論では `#abst_title(title: [], laboratory: [], authors: (...))`、修論では `#abst_title(title: (...), author: [], chief: (...), assistant: (...))` です。
+<Tabs>
+  <TabItem value="卒論" label="卒論">
+    ```typst
+    #abst_title(
+      title: [ここにタイトルを挿入],
+      laboratory: [塚原],
+      authors: (
+        ( student-id: "75*****",
+          name: "機械　工作"
+        ),
+        ( student-id: "75*****",
+          name: "野田　理科"
+        ),
+      )
+    )
+    ```
+    <Card>
+      ![](/TUS-ME_thesis_template_manual/api/images/abst-title-typst.png)
+    </Card>
+
+    ## パラメータ
+
+    ```typst
+    #abst_title(
+      title: content,
+      laboratory: content,
+      authors: array
+    )
+    ```
+
+    - **title**
+
+        要旨の和文題目を指定します
+
+    - **laboratory**
+
+        研究室名を指定します
+
+    - **authors**
+
+        著者欄を指定します．
+        配列の要素は以下のように指定します．
+
+        ```typst
+        ( student-id: "学籍番号",
+          name: "氏名"
+        )
+        ```
+
+  </TabItem>
+  <TabItem value="修論" label="修論">
+    ```typst
+    #abst_title(
+      title: ([◯◯◯◯◯（修士論文題目）◯◯◯◯◯], [◯◯◯◯◯（修士論文題目副題）◯◯◯◯◯]),
+      author: [申請者氏名],
+      chief: ([指導教員氏名１], [指導教員氏名２]),
+      assistant: ([指導補助教員氏名１], [指導補助教員氏名２])
+    )
+    ```
+    <Card>
+      ![](/TUS-ME_thesis_template_manual/api/images/abst-title-typst2.png)
+    </Card>
+
+    ## パラメータ
+
+    ```typst
+    #abst_title(
+      title: content | array,
+      author: content,
+      chief: array,
+      assistant: array
+    )
+    ```
+
+    - **title**
+
+        要旨の和文題目を指定します．
+        副題がある場合は，以下のように配列の要素として指定します．
+
+        ```typst
+        ([◯◯◯◯◯（修士論文題目）◯◯◯◯◯], [◯◯◯◯◯（修士論文題目副題）◯◯◯◯◯])
+        ```
+
+        副題がない場合は，直接contentを指定します．
+
+        ```typst
+        [◯◯◯◯◯（修士論文題目）◯◯◯◯◯]
+        ```
+
+    - **author**
+
+        申請者氏名を指定します
+
+    - **chief**
+
+        指導教員氏名を指定します．
+        配列の要素は以下のように指定します．
+
+        ```typst
+        ([指導教員氏名１], [指導教員氏名２])
+        ```
+
+    - **assistant**
+
+        指導補助教員氏名を指定します．
+        配列の要素は以下のように指定します．
+
+        ```typst
+        ([指導補助教員氏名１], [指導補助教員氏名２])
+        ```
+
+  </TabItem>
+</Tabs>
 
 ## 説明
 
-同名ですが、卒論版は研究室・学生番号・氏名、修論版は申請者・指導教員・指導補助教員の欄を組版します。対応する要旨スタイルだけで使用してください。
+同名ですが，卒論版は研究室・学生番号・氏名，修論版は申請者・指導教員・指導補助教員の欄を組版します．
+対応する要旨スタイルだけで使用してください．

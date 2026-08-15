@@ -3,15 +3,25 @@ title: thesis_init
 description: 本文用の共通スタイルを適用する
 ---
 
+本文用の共通スタイルを適用するための関数
+
 ## 構文
 
 ```typst
 #show: thesis_init
 ```
 
+## パラメータ
+
+```typst
+#show: thesis_init
+```
+
+なし
+
 ## 説明
 
-文書全体を引数 `body` として受け取り、A4 余白、12pt 書体、段落、章見出し、相互参照、図表、表、リスト、文献をテンプレート規定に設定します。`thesis_style.typ` を import 後、文書の最初で一度だけ適用します。
+文書全体を暗黙の `body` として受け取り，A4 余白，12 pt 書体，段落，章見出し，相互参照，図表，表，リスト，文献をテンプレート規定に設定します．`thesis_style.typ` を import 後，文書の最初で一度だけ適用します．
 
 ```typst
 #import "style/thesis_style.typ": *

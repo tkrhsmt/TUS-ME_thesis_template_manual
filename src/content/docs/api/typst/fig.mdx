@@ -3,16 +3,61 @@ title: fig
 description: 論文用の図配置を行う
 ---
 
+import { Card, Steps } from '@astrojs/starlight/components';
+
+論文用の図配置を行うための関数
+
 ## 構文
 
 ```typst
-#fig(..arg, label: none, placement: auto)
+#fig(
+  image("../figure/image-A.svg"),
+  caption: [image-A],
+  label: <fig:image-A>
+)
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/fig-typst1.png)
+</Card>
+
+## パラメータ
+
+```typst
+#fig(
+    ..arg,
+    label: none | label,
+    placement: auto | top | bottom | page
+)
+```
+
+- **..arg**
+
+    標準の `figure` に渡す可変引数です．画像，キャプション，補足などを指定します．
+
+- **label**
+
+    図のラベルを指定します．本文から参照する図には必ず指定してください．
+
+- **placement**
+
+    `auto`（既定値），`top`，`bottom`，または単独ページ用の`page`を指定します．
 
 ## 説明
 
-標準 `figure` の可変引数 `..arg` を受け取り、図の高さ、章先頭かどうか、現在位置を基に配置を決めます。`placement` は既定の `auto`、`top`、`bottom`、それ以外（単独ページ）を指定できます。`label` は図の後ろに付与されます。
+標準 `figure` の可変引数 `..arg` を受け取り，図の高さ，章先頭かどうか，現在位置を基に配置を決めます．
+基本的には，以下の方針で配置されます．
 
-```typst
-#fig(image("figure/image.svg", width: 70%), caption: [説明], label: <fig:sample>)
-```
+<Steps>
+
+1. 図の高さがページの半分以上のとき，単独ページ`page`に配置
+
+2. 図の高さが半分以下の場合，章先頭であれば`bottom`に配置
+
+3. 章先頭でなく，図の高さがページの半分以下の場合，`top`に配置
+
+</Steps>
+
+:::caution[注意]
+図の自動配置は，必ずしも意図した通りに配置できるとは限りません．
+その場合は，`placement` パラメータを指定して配置を調整してください．
+:::

@@ -3,12 +3,23 @@ title: nonumber
 description: equate の式番号を無効にするラベル
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+式番号を無効にするラベル
+
 ## 構文
 
 ```typst
-#align(... ) <nonumber>
+$
+    sin (x + x) &= sin x cos x + cos x sin x nonumber\
+    &= 2 sin x cos x
+$
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/nonumber-typst.png)
+</Card>
 
 ## 説明
 
-`nonumber` は `<equate:revoke>` を値に持つテンプレート定数です。`equate` パッケージによる整列数式の番号付けを抑止するラベルとして使います。
+`nonumber` は `<equate:revoke>` を値に持つテンプレート定数です．
+`equate` パッケージによる整列数式の番号付けを抑止するラベルとして使います．

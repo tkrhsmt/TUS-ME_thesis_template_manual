@@ -3,12 +3,53 @@ title: signary-list
 description: 記号表の区分を出力する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+記号表の区分を出力するための関数
+
 ## 構文
 
 ```typst
-#signary-list(title: [], body)
+#signary-list(title: [Alphabet],
+  (
+    [ $d$ ]   , [ Channel width [#unit("m", space: none)] ],
+    [ $L_j$ ] , [ Computational domainsize in $j$-direction [#unit("m", space: none)] ],
+    [ $N_j$ ] , [ Number of grid points in $𝑗$-direction ],
+    [ $R e$ ] , [ Reynolds number, $=u d\/nu$ ],
+    [ $u$ ]   , [ Velocity [#unit("m/s", space: none)] ],
+  )
+)
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/signary-list-typst.png)
+</Card>
+
+## パラメータ
+
+```typst
+#signary-list(
+  title: content | string,
+  body array
+)
+```
+
+- **title**
+
+    記号表の区分名を指定します
+
+- **body**
+    記号表の内容を指定します．
+    配列の要素は以下のように指定します．
+
+    ```typst
+    (
+        [ 記号 ],[ 説明 ],
+        ...
+    )
+    ```
 
 ## 説明
 
-`title` を表示後、左列幅 10em、罫線なしの 2 列相当の `table` に `body` を展開します。段落字下げを無効にするため、記号表の Alphabet・Greek などの区分に使います。
+`title` を表示後，左列幅 10em，罫線なしの 2 列相当の `table` に `body` を展開します．
+段落字下げを無効にするため，記号表の Alphabet・Greek などの区分に使います．
+ページの余白を超える場合は，次ページに自動的に改ページされます．

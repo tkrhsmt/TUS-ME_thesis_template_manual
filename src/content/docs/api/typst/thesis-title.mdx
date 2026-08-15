@@ -3,14 +3,90 @@ title: thesis_title
 description: 学位論文の表紙を出力する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+学位論文の表紙を出力するための関数
+
 ## 構文
 
 ```typst
-#thesis_title(title: [タイトル], year: "2025", master: false, month: "2", institution: none, laboratory: [〇〇], authors: ((student-id: "75*****", name: "機械　工作"),))
+#thesis_title(
+    title: [タイトル],
+    year: "2025",
+    master: false,
+    month: "2",
+    institution: none,
+    laboratory: [〇〇],
+    authors: (
+        (student-id: "75*****", name: "機械　工作"),
+    )
+)
 ```
 
-## 引数
+<details>
+<summary>出力結果</summary>
 
-`title` は題目、`year` は年度、`master` は修論なら `true`、`month` は提出月です。`institution` を省略すると学位種別に応じた所属名を自動出力します。`laboratory` の末尾には「研究室」が加わります。`authors` は `student-id` と `name` を持つ配列です。
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/thesis-title-typst.png)
+</Card>
+</details>
 
-年度と学籍番号は表紙上で全角に変換されます。関数の後にページ設定を戻すため、表紙は本文より前に置いてください。
+## パラメータ
+
+```typst
+#thesis_title(
+  authors: array = (
+    (
+        student-id: "75*****",
+        name: "機械　工作",
+    ),
+  ),
+  institution: none = none,
+  laboratory: text = Expr(..),
+  master: bool = false,
+  month: str = "2",
+  title: str | text = Expr(..),
+  year: str = "2025",
+)
+```
+
+- **title**
+
+    論文題目を content で指定します．改行には `\` を使います．
+
+- **year**
+
+    年度を指定します．半角・全角数字のどちらでも指定できます．
+
+- **master**
+
+    `true` で修士論文，`false` で卒業論文を出力します．既定値は `false` です．
+
+- **month**
+
+    提出月を指定します．既定値は `"2"` です．
+
+- **institution**
+
+    所属名を指定します．`none` の場合は学位種別に応じた標準の所属名を出力します．
+
+- **laboratory**
+
+    研究室名を指定します．末尾の「研究室」は自動で追加されます．
+
+- **authors**
+
+    `student-id` と `name` を持つ著者情報の配列を指定します．
+
+## 説明
+
+年度と学籍番号は表紙上で全角に変換されます．表紙は本文より前に置いてください．
+
+```typst
+#thesis_title(
+  title: [乱流熱伝達に関する研究\数値解析と実験的検証],
+  year: 2025,
+  laboratory: [塚原],
+  authors: ((student-id: "75*****", name: "機械　工作"),),
+)
+```

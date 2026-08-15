@@ -3,16 +3,49 @@ title: comment
 description: 添削用コメント枠を出力する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+添削用コメント枠を出力するための関数
+
 ## 構文
 
 ```typst
-#comment(title: none)[内容]
+#comment(title: [タイトル])[内容]
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/comment-typst1.png)
+</Card>
+
+## パラメータ
+
+```typst
+#comment(
+    title: content | string | none,
+    body content | string
+)
+```
+
+- **title**
+
+    コメント枠の題目を指定します．
+    `none` の場合は題目なしの枠になります．
+    デフォルトは `none` です．
+
+- **body**
+
+    コメント本文を content で指定します．
 
 ## 説明
 
-灰色のコメント枠を出力します。`title` は任意で、指定すると枠上部に題目を表示します。`check-contents` を有効にすると、題目（未指定なら「無題」）が文末のコメント一覧に収集されます。
+灰色のコメント枠を出力します．
+`check-contents` を有効にすると，題目（未指定なら「無題」）が文末のコメント一覧に収集されます．
 
 ```typst
-#comment(title: [確認事項])[この節を確認してください。]
+#comment(title: [確認事項])[この節を確認してください．]
+```
+
+タイトルを指定しない場合は，タイトル枠が表示されず，文末のコメント一覧では「無題」として収集されます．
+
+```typst
+#comment[この節を確認してください．]
 ```

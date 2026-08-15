@@ -3,12 +3,113 @@ title: check-contents
 description: 添削用の行番号と検査一覧を出力する
 ---
 
+import { Tabs, TabItem, Card } from '@astrojs/starlight/components';
+
+添削用の行番号と検査一覧を出力するための関数
+
 ## 構文
 
 ```typst
 #show: check-contents
 ```
 
+## パラメータ
+
+なし
+
 ## 説明
 
-本文ではページ単位の行番号を付け、`comment` の一覧、ラベルのない図、本文から参照されない図を文末に一覧化します。要旨スタイルでは行番号のみを出力します。添削時だけ有効にし、提出前にはコメントアウトしてください。
+本文では
+
+1. ページ単位の行番号
+2. `comment` の一覧
+3. ラベルのない図，本文から参照されない図の文末に一覧化
+
+を出力します．
+
+:::caution[注意]
+添削時だけ有効にし，提出前にはコメントアウトしてください．
+:::
+
+### 行番号の付与
+
+行番号はページ単位で付与されます．
+本関数を無効にすると行番号は付与されません．
+
+<Tabs>
+  <TabItem label="有効時">
+    <Card>
+      ![](/TUS-ME_thesis_template_manual/api/images/check-contents-typst1.png)
+    </Card>
+  </TabItem>
+  <TabItem label="無効時">
+    <Card>
+      ![](/TUS-ME_thesis_template_manual/api/images/check-contents-typst2.png)
+    </Card>
+  </TabItem>
+</Tabs>
+
+要旨スタイルでは行番号のみを出力します．
+
+### `comment`の一覧
+
+コメントを論文本体で出力すると，最終ページにコメントの一覧が出力されます．
+
+```typst
+#comment(title: [タイトルのあるコメント])[
+  コメント
+]
+
+#comment[
+  コメント
+]
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/check-contents-typst3.png)
+</Card>
+
+一覧には，
+
+- コメントのあるページ番号
+- コメントのタイトル（省略可）．省略時には「無題」と表示されます
+
+が出力されます．
+ページ番号とコメントタイトルはクリックすると本文のコメント箇所にジャンプできます．
+コメントの一覧表示は，要旨スタイルでは出力されません．
+
+### 警告の一覧
+
+本文中にラベルのない図，本文から参照されない図がある場合には，警告の一覧が最終ページに出力されます．
+
+```typst
+#fig(
+  image("../figure/image-A.svg"),
+  caption: [image-A]
+)
+
+#fig(
+  image("../figure/image-B.svg"),
+  caption: [image-B],
+  label: <fig:image-B>
+)
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/check-contents-typst4.png)
+</Card>
+
+警告の種類は，上記のように2種類あります．
+
+1. ラベルのない図
+2. ラベルはあるが，本文から参照されていない図
+
+論文では，**図のラベルは必ず本文から参照する**というルールがあるため，このような警告が出力されます．
+ラベルを付け，さらに本文中で参照することで，警告は出力されなくなります．
+警告一覧には，
+
+- 該当の図があるページ番号
+- 該当の図の番号
+- 警告の内容
+
+が出力されます．
+ページ番号と図番号はクリックすると本文の該当箇所にジャンプできます．
+表については，引用が必須ではないため，警告は出力されません．

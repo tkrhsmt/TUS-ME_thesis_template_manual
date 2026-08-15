@@ -3,12 +3,95 @@ title: tblr
 description: 論文形式の表を出力する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+論文形式の表を出力するための関数
+
 ## 構文
 
 ```typst
-#tblr(..body, columns: auto, rows: auto, gutter: auto, column-gutter: auto, row-gutter: auto, align: auto, fill: none, stroke: auto, inset: 0% + 5pt)
+#fig(
+    tblr(
+    columns: 2,
+    [*Amount*], [*Ingredient*],
+    [360g], [Baking flour],
+    [250g], [Butter (room temp.)],
+    [150g], [Brown sugar],
+    [100g], [Cane sugar],
+    [100g], [70% cocoa chocolate],
+    [100g], [35-40% cocoa chocolate],
+    [2], [Eggs],
+    [Pinch], [Salt],
+    [Drizzle], [Vanilla extract],
+    ),
+    caption: [Ingredients for chocolate chip cookies],
+    label: <table:ingredients>
+)
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/tblr-typst.png)
+</Card>
+
+## パラメータ
+
+```typst
+#tblr(
+  ..body: arguments,
+  align: alignment | array | auto | function = auto,
+  column-gutter: array | auto | length | type = auto,
+  columns: array | auto | int | length | type = auto,
+  fill: color | none = none,
+  gutter: array | auto | length | type = auto,
+  inset: any | inset = 0% + 5pt,
+  row-gutter: auto = auto,
+  rows: auto = auto,
+  stroke: auto = auto,
+)
+```
+
+- **body**
+
+    表の内容を指定します
+
+- **align**
+
+    列の配置を指定します．
+    配列で指定する場合，列ごとに `left`，`center`，`right` のいずれかを指定します．
+    省略した場合は全て`center`に設定されます．
+
+- **column-gutter**
+
+    列の間隔を指定します（規定値は `0pt`）．
+
+- **columns**
+
+    列の数を指定します（規定値は `auto`）．
+
+- **fill**
+
+    セルの背景色を指定します（規定値は `none`）．
+
+- **gutter**
+
+    セルの余白を指定します（規定値は `0pt`）．
+
+- **inset**
+
+    セルの内側の余白を指定します（規定値は `0% + 5pt`）．
+
+- **row-gutter**
+
+    行の間隔を指定します（規定値は `0pt`）．
+
+- **rows**
+
+    行の数を指定します（規定値は `auto`）．
+
+- **stroke**
+
+    罫線の色を指定します（規定値は `auto`）．
 
 ## 説明
 
-`table` の主要引数を受け取り、テンプレート規定の罫線とセル余白を設定します。先頭に列をまたぐ空セルを加えるため、表頭の罫線を適切に出力できます。`stroke: auto` は既定の横罫線形式です。
+`table` の主要引数を受け取り，日本機械学会のテンプレート規定の罫線とセル余白を設定します．
+先頭に列をまたぐ空セルを加えるため，表頭の罫線を適切に出力できます．
