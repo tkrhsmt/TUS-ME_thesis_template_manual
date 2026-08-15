@@ -5,22 +5,43 @@ sidebar:
   order: -1
 ---
 
-`#import "style/thesis_style.typ": *`（要旨では対応する `abst_*_style.typ`）で読み込むテンプレート固有 API です。関数ごとに構文、引数、既定値、挙動、例を記載しています。
+このページは，学位論文 Typst テンプレートが独自に提供する API の入口です．Typst 標準の関数や外部パッケージの API ではなく，テンプレートの書式・構成・添削機能を利用するための関数だけを掲載しています．
+
+本文では `#import "style/thesis_style.typ": *`，要旨では対応する `abst_*_style.typ` を読み込みます．通常はまず [`thesis_init`](./thesis-init/) を適用し，表紙・目次・記号表・本文・付録の順に各 API を使います．個別ページでは構文，パラメータ，既定値，出力の挙動，使用例を確認できます．
 
 ## 本文
 
-- [`thesis_init`](./thesis-init/)、[`thesis_title`](./thesis-title/)、[`outline-page`](./outline-page/)
-- [`thesis_signary`](./thesis-signary/)、[`thesis_main`](./thesis-main/)、[`thesis-appendix`](./thesis-appendix/)
-- [`check-contents`](./check-contents/)、[`comment`](./comment/)
+テンプレートの全体構成とページ番号・柱を設定する API です．`#show:` で指定する関数は，以降の文書範囲に設定を適用します．
+
+- [`thesis_init`](./thesis-init/) — 本文全体の共通設定
+- [`thesis_title`](./thesis-title/) — 学位論文の表紙
+- [`outline-page`](./outline-page/) — 目次
+- [`thesis_signary`](./thesis-signary/) — 記号表のページ設定
+- [`thesis_main`](./thesis-main/) — 本文のページ設定
+- [`thesis-appendix`](./thesis-appendix/) — 付録の番号とページ設定
+- [`check-contents`](./check-contents/) — 添削用の行番号・検査一覧
+- [`comment`](./comment/) — 添削用コメント枠
 
 ## 図表・表記
 
-- [`fig`](./fig/)、[`tblr`](./tblr/)、[`signary-list`](./signary-list/)
-- [`number-to-zenkaku`](./number-to-zenkaku/)、[`zenkaku-to-number`](./zenkaku-to-number/)、[`linebreak_num`](./linebreak-num/)
-- [`nonumber`](./nonumber/)、[`LaTeX`](./latex-logo/)、[無次元数定数](./dimensionless-numbers/)、[スタイル定数](./style-constants/)
+図表の組版、記号表、数式中の表記に使う API です．標準の `figure` や `table` をそのまま使う代わりに、テンプレートの見た目・配置方針を適用した関数を利用できます．
+
+- [`fig`](./fig/) — 論文用の図配置
+- [`tblr`](./tblr/) — 論文形式の表
+- [`signary-list`](./signary-list/) — 記号表の区分
+- [`nonumber`](./nonumber/) — 式番号を付けないラベル
+- [`LaTeX`](./latex-logo/) — LaTeX ロゴ
+- [無次元数定数](./dimensionless-numbers/) — `#Re`、`#Nu` など
+- [スタイル定数](./style-constants/) — フォント列・内部状態
 
 ## 要旨・差分
 
-- [`abst_init`](./abst-init/)、[`abst_title`](./abst-title/)、[`abst_title_en`](./abst-title-en/)
-- [`spacing-body`](./spacing-body/)、[`make-space-character`](./make-space-character/)
-- [`diff-string`](./diff-string/)、[`diff-content`](./diff-content/)、[差分スクリプト](./diff-script/)
+要旨の組版、または Git の過去版との比較に使う API です．`abst_title` は卒論・修論で引数が異なるため、対応する要旨テンプレートの説明を確認してください．
+
+- [`abst_init`](./abst-init/) — 要旨の共通設定
+- [`abst_title`](./abst-title/) — 和文題目・著者欄
+- [`abst_title_en`](./abst-title-en/) — 卒論要旨の英文題目欄
+- [`spacing-body`](./spacing-body/) — 修論要旨本文の文字間調整
+- [`diff-string`](./diff-string/) — 二つの文字列の差分表示
+- [`diff-content`](./diff-content/) — 二つの content の差分表示
+- [差分スクリプト](./diff-script/) — Git の過去版との比較 PDF
