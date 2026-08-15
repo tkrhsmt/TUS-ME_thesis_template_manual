@@ -3,16 +3,46 @@ title: date
 description: 表紙の提出年月を設定する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+表紙の提出年月を設定するためのコマンド
+
 ## 構文
 
 ```latex
 \date{提出年月}
 ```
+<details>
+<summary>出力例</summary>
+
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/date-latex.png)
+</Card>
+
+</details>
+
+## パラメータ
+
+```latex
+\date{
+    body
+}
+```
+
+- **body**
+
+    表紙の題目の下に出力する年月を指定します
 
 ## 説明
 
-表紙の題目の下に出力する年月を設定します。未指定時の値は LaTeX の `\today` ですが、学位論文では必ず提出年月に明示的に設定してください。
+表紙の題目の下に出力する年月を設定します．
+未指定時の値は LaTeX の `\today` ですが，学位論文では必ず提出年月に明示的に設定してください．
 
 ```latex
 \date{２０２６年２月}
 ```
+
+:::caution[注意]
+表示する年月は，学位論文の**提出年月**に合わせてください．
+提出年度ではないことに注意してください．
+:::

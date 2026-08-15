@@ -3,19 +3,35 @@ title: mojiperline
 description: 修論要旨の 1 行当たり文字数を設定する
 ---
 
+修士論文要旨の 1 行当たり文字数を設定するためのコマンド
+
 ## 構文
 
 ```latex
-\mojiperline{文字数}
+\mojiperline{35}
 ```
+
+## パラメータ
+
+```latex
+\mojiperline{
+    body
+}
+```
+
+- **body**
+
+    1 行当たりの文字数を指定します
 
 ## 説明
 
-修論要旨の `settings_master.sty` だけが提供するコマンドです。本文領域と指定文字数から日本語文字間隔を計算し、段落字下げにも反映します。`\begin{document}` の直後に設定します。
+修論要旨の `settings_master.sty` だけが提供するコマンドです．
+本文領域と指定文字数から日本語文字間隔を計算し，段落字下げにも反映します．
+`\begin{document}` の直後に設定します．
 
 ```latex
 \begin{document}
 \mojiperline{35}
 ```
 
-卒論要旨と本文用の `settings.sty` では定義されません。
+卒論要旨と本文用の `settings.sty` では定義されません．

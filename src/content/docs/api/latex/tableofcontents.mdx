@@ -3,17 +3,29 @@ title: tableofcontents
 description: テンプレート形式の目次を出力する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+テンプレート形式の目次を出力するためのコマンド
+
 ## 構文
 
 ```latex
 \tableofcontents
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/tableofcontents-latex.png)
+</Card>
+
+## パラメータ
+
+なし
 
 ## 説明
 
-標準の `\tableofcontents` をテンプレート用に再定義したコマンドです。「目次」の番号なし章を出力して `.toc` を読み込み、目次ページのページスタイルを空にします。
+標準の `\tableofcontents` をテンプレート用に再定義したコマンドです．
+「目次」の番号なし章を出力して `.toc` を読み込み，目次ページのページスタイルを空にします．
 
-通常は `\makecover` の直後、`\signary` の前に置きます。
+通常は `\makecover` の直後，`\signary` の前に置きます．
 
 ```latex
 \makecover

@@ -3,18 +3,46 @@ title: title
 description: 表紙の論文題目を設定する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+表紙の論文題目を設定するためのコマンド
+
 ## 構文
 
 ```latex
 \title{題目}
 ```
 
+<details>
+<summary>出力例</summary>
+
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/title-latex.png)
+</Card>
+
+</details>
+
+## パラメータ
+
+```latex
+\title{
+    body
+}
+```
+
+- **body**
+
+    論文題目を指定します
+
 ## 説明
 
-表紙中央の論文題目を設定します。テンプレートは標準の `\title` を表紙用に再定義しています。長い題目は引数内に `\\` を入れて任意の位置で改行できます。
+表紙中央の論文題目を設定します．
+テンプレートは標準の `\title` を表紙用に再定義しています．
+長い題目は引数内に `\\` を入れて任意の位置で改行できます．
 
 ```latex
 \title{乱流熱伝達に関する研究\\数値解析と実験的検証}
 ```
 
-`\makecover` より前に指定します。空欄のままでは表紙の題目を出力できません。
+`\makecover` より前に指定します．
+空欄のままでは表紙の題目を出力できません．

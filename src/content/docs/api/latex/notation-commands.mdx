@@ -3,15 +3,24 @@ title: 無次元数・表記コマンド
 description: settings.sty が追加・再定義する数式表記
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+数式表記に関するコマンド
+
 ## 構文
 
 ```latex
 $\Re = \frac{UL}{\nu}, \qquad \rms = \sqrt{\overline{u^2}}$
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/notation-commands-latex.png)
+</Card>
 
 ## 提供コマンド
 
-`\Gr`、`\Ma`、`\Nu`、`\Pe`、`\Pr`、`\Re`、`\Ra`、`\Sc`、`\St`、`\Ta`、`\Wi` は、それぞれ対応する無次元数をイタリック体で出力します。`\Pr` と `\Re` は既存定義をテンプレート用に再定義しています。`\rms` はローマン体で出力します。
+`\Gr`、`\Ma`、`\Nu`、`\Pe`、`\Pr`、`\Re`、`\Ra`、`\Sc`、`\St`、`\Ta`、`\Wi` は，それぞれ対応する無次元数をイタリック体で出力します．
+`\Pr` と `\Re` は既存定義をテンプレート用に再定義しています．
+`\rms` はローマン体で出力します．
 
 | 入力 | 出力 |
 | --- | --- |
@@ -30,4 +39,5 @@ $\Re = \frac{UL}{\nu}, \qquad \rms = \sqrt{\overline{u^2}}$
 
 ## 倍角ダッシュ
 
-`\――` は、日本語の倍角ダッシュ間の空きを詰めて出力する表記コマンドです。要旨用スタイルを含む全スタイルで使用できます。
+`\――` は，日本語の倍角ダッシュ間の空きを詰めて出力する表記コマンドです．
+要旨用スタイルを含む全スタイルで使用できます．

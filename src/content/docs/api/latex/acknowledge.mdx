@@ -3,19 +3,31 @@ title: acknowledge
 description: 謝辞を開始する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+謝辞を開始するためのコマンド
+
 ## 構文
 
 ```latex
 \acknowledge
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/acknowledge-latex.png)
+</Card>
+
+## パラメータ
+
+なし
 
 ## 説明
 
-改ページ後に「謝辞」の番号なし章を作成し、目次に追加します。謝辞専用の柱・ノンブルを有効にするため、謝辞本文の前に一度だけ記述します。
+改ページ後に「謝辞」の番号なし章を作成し，目次に追加します．
+謝辞専用の柱・ノンブルを有効にするため，謝辞本文の前に一度だけ記述します．
 
 ```latex
 \acknowledge
 本研究を進めるにあたり、…
 ```
 
-見出し文字列は `\acknowledgename` を再定義して変更できます。
+見出し文字列は `setting.sty`に記載されている`\acknowledgename` を再定義して変更できます．

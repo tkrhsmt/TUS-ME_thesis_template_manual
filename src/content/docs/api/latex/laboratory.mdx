@@ -3,15 +3,41 @@ title: laboratory
 description: 表紙の研究室名を設定する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+表紙の研究室名を設定するためのコマンド
+
 ## 構文
 
 ```latex
 \laboratory{研究室名}
 ```
 
+<details>
+<summary>出力例</summary>
+
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/laboratory-latex.png)
+</Card>
+
+</details>
+
+## パラメータ
+
+```latex
+\laboratory{
+    body
+}
+```
+
+- **body**
+
+    研究室名を指定します
+
 ## 説明
 
-表紙の所属の下に出力する研究室名を設定します。接尾辞は自動追加されないため、必要なら「研究室」まで含めて指定します。
+表紙の所属の下に出力する研究室名を設定します．
+接尾辞は自動追加されないため，必要なら「研究室」まで含めて指定します．
 
 ```latex
 \laboratory{塚原研究室}

@@ -3,11 +3,39 @@ title: 表示名・ページスタイル
 description: settings.sty の表示文字列とページスタイル定義
 ---
 
+表示名とページスタイルの定義
+
+import { Card } from '@astrojs/starlight/components';
+
 ## 表示名
 
-テンプレートは `\chpre`（`第`）、`\chpost`（`章`）、`\signaryname`（`記号表`）、`\acknowledgename`（`謝辞`）、`\appname`（`付録`）を独自定義します。`\contentsname` は `目次`、`\bibname` は `文献`、`\figurename` は `Fig.~`、`\tablename` は `Table~` に再定義します。
+```latex
+\chpre
 
-必要な場合はプリアンブルで再定義できます。
+\chpost
+
+\signaryname
+
+\acknowledgename
+
+\appname
+
+\contentsname
+
+\bibname
+
+\figurename
+
+\tablename
+```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/display-settings-latex.png)
+</Card>
+
+テンプレートは `\chpre`（`第`）、`\chpost`（`章`）、`\signaryname`（`記号表`）、`\acknowledgename`（`謝辞`）、`\appname`（`付録`）を独自定義します．
+`\contentsname` は `目次`、`\bibname` は `文献`、`\figurename` は `Fig.~`、`\tablename` は `Table~` に再定義します．
+
+必要な場合はプリアンブルで再定義できます．
 
 ```latex
 \renewcommand{\acknowledgename}{Acknowledgements}
@@ -16,6 +44,7 @@ description: settings.sty の表示文字列とページスタイル定義
 
 ## ページスタイル
 
-`normal`、`chapterfirstpage`、`signary`、`acknowledge`、`bibliography`、`appendix` を定義します。通常は各専用コマンドが設定するため、直接の `\pagestyle` は本文開始時の `\pagestyle{normal}` と、付録での `\pagestyle{appendix}` だけで十分です。
+`normal`，`chapterfirstpage`，`signary`，`acknowledge`，`bibliography`，`appendix` を定義します．
+通常は各専用コマンドが設定するため，直接の `\pagestyle` は本文開始時の `\pagestyle{normal}` と，付録での `\pagestyle{appendix}` だけで十分です．
 
 章見出し、図表キャプション、単語間隔も `settings.sty` によりテンプレートの規定に合わせて変更されます。

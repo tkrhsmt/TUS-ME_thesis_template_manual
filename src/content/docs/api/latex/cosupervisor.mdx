@@ -3,12 +3,28 @@ title: cosupervisor
 description: 副指導教員情報を保持する
 ---
 
+副指導教員情報を保持するためのコマンド
+
 ## 構文
 
 ```latex
 \cosupervisor{副指導教員名}
 ```
 
+## パラメータ
+
+```latex
+\cosupervisor{
+    body
+}
+```
+
+- **body**
+
+    副指導教員名を指定します
+
 ## 説明
 
-値を内部変数 `\@cosupervisor` に保存します。現行の `\makecover` はこの値を出力しません。表紙を独自拡張するときだけ使用してください。
+値を内部変数 `\@cosupervisor` に保存します．
+現行の `\makecover` はこの値を出力しません．
+表紙を独自拡張するときだけ使用してください．

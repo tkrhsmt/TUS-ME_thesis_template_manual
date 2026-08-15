@@ -3,12 +3,28 @@ title: coworker
 description: 共同著者情報を保持する
 ---
 
+共同著者情報を保持するためのコマンド
+
 ## 構文
 
 ```latex
 \coworker{共同著者情報}
 ```
 
+## パラメータ
+
+```latex
+\coworker{
+    body
+}
+```
+
+- **body**
+
+    共同著者情報を指定します
+
 ## 説明
 
-値を内部変数 `\@coworker` に保存します。現行の `settings.sty` の `\makecover` はこの値を出力しません。テンプレートを拡張して共同著者欄を作る場合のために存在する API です。
+値を内部変数 `\@coworker` に保存します．
+現行の `settings.sty` の `\makecover` はこの値を出力しません．
+テンプレートを拡張して共同著者欄を作る場合のために存在する API です．

@@ -3,15 +3,31 @@ title: linesperpage
 description: 修論要旨の 1 ページ当たり行数を設定する
 ---
 
+修士論文要旨の 1 ページ当たり行数を設定するためのコマンド
+
 ## 構文
 
 ```latex
-\linesperpage{行数}
+\linesperpage{30}
 ```
+
+## パラメータ
+
+```latex
+\linesperpage{
+    body
+}
+```
+
+- **body**
+
+    1 ページ当たりの行数を指定します
 
 ## 説明
 
-修論要旨の `settings_master.sty` だけが提供するコマンドです。本文領域の高さを指定行数で割り、ベースライン間隔を設定します。`\mojiperline` と続けて、本文前に使用します。
+修論要旨の `settings_master.sty` だけが提供するコマンドです．
+本文領域の高さを指定行数で割り，ベースライン間隔を設定します．
+`\mojiperline` と続けて，本文前に使用します．
 
 ```latex
 \mojiperline{35}

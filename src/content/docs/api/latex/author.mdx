@@ -3,20 +3,50 @@ title: author
 description: 表紙の著者情報を設定する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+表紙の著者情報を設定するためのコマンド
+
 ## 構文
 
 ```latex
 \author{著者情報}
 ```
 
+<details>
+<summary>出力例</summary>
+
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/author-latex.png)
+</Card>
+
+</details>
+
+## パラメータ
+
+```latex
+\author{
+    body
+}
+```
+
+- **body**
+
+    表紙下部に出力する著者情報を指定します
+
 ## 説明
 
-表紙下部にそのまま出力する内容を設定します。学籍番号と氏名の間隔は、テンプレート例と同じ `\hskip2\zw` を保ってください。姓と名の間には全角スペースを使用します。
+表紙下部にそのまま出力する内容を設定します．
+学籍番号と氏名の間隔は，テンプレート例と同じ `\hskip2\zw` を保ってください．
+姓と名の間には全角スペースを使用します．
 
 ```latex
 \author{%
-  ７５＊＊＊＊＊\hskip2\zw
-  姓姓　名名
+% 学籍番号を全角 7 桁で入力
+７５＊＊＊＊＊
+\hskip2\zw% 学籍番号と氏名の間のスペース，消さない
+% 姓と名の間は全角 1 文字スペース
+姓姓　名名
 }
 ```
 

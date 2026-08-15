@@ -3,15 +3,36 @@ title: citep
 description: 全角括弧付きで著者年引用を出力する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+全角括弧付きで著者年引用を出力するためのコマンド
+
 ## 構文
 
 ```latex
-\citep{文献キー}
+\citep{Matsukawa:PoF2022}
 ```
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/citep-latex.png)
+</Card>
+
+## パラメータ
+
+```latex
+\citep{
+    key
+}
+```
+
+- **key**
+
+    BibTeX のエントリのキーを指定します
 
 ## 説明
 
-`natbib` の `\citep` をテンプレートが再定義したものです。`\citealp` の出力を全角丸括弧 `（` `）` で囲みます。本文の和文引用に使用します。
+`natbib` の `\citep` をテンプレートが再定義したものです．
+`\citealp` の出力を全角丸括弧 `（` `）` で囲みます．
+本文の和文引用に使用します．
 
 ```latex
 先行研究で提案されている\citep{smith2024}。

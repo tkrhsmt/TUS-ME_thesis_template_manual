@@ -3,17 +3,50 @@ title: affiliation
 description: 表紙の所属を設定する
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
+表紙の所属を設定するためのコマンド
+
 ## 構文
 
 ```latex
 \affiliation{所属名}
 ```
 
-## 説明
+<details>
+<summary>出力例</summary>
 
-表紙の提出年月の下に所属を出力します。卒論では学部・学科名、修論では大学院・研究科・専攻名を設定します。
+<Card>
+![](/TUS-ME_thesis_template_manual/api/images/affiliation-latex.png)
+</Card>
+
+</details>
+
+## パラメータ
 
 ```latex
-\affiliation{東京理科大学創域理工学部機械航空宇宙工学科}
-% \affiliation{東京理科大学大学院創域理工学研究科機械航空宇宙工学専攻}
+\affiliation{
+    body
+}
 ```
+
+- **body**
+
+    所属名を指定します
+
+## 説明
+
+表紙の提出年月の下に所属を出力します．
+卒論では学部・学科名，修論では大学院・研究科・専攻名を設定します．
+
+- 卒業論文の場合
+
+    ```latex
+    \affiliation{東京理科大学創域理工学部機械航空宇宙工学科}
+    ```
+
+- 修士論文の場合
+
+    ```latex
+    \affiliation{東京理科大学大学院創域理工学研究科機械航空宇宙工学専攻}
+    ```
