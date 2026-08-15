@@ -5,11 +5,21 @@ sidebar:
   order: 7
 ---
 
-先生や先輩に学位論文を添削してもらう際は，貴重な時間を割いて見てもらっているので添削者への配慮が大事です． 特にこのマニュアルの第 LaTeXの基本 章から第 BibTeXによる参考文献一覧の出力 章にかけての内容をよく読んで，研究内容と関係の無い些末なミスばかり指摘されることのないように気をつけましょう． 学位論文執筆時に参考になる自己チェックリストは [こちら](https://github.com/ryo-ARAKI/thesis_template_ou_es/blob/master/self_checklist.md)． また，学位論文の PDF ファイルには本文だけでなく，これから書き足す予定の内容や添削者に対する相談・メモなども併せて書いておくといいでしょう． `tcolorbox` パッケージの「枠」を使うと，一目見て本文とは別のメモ書きであるとわかるのでオススメです． このテンプレートのマニュアルでも `tcolorbox` を活用しています． `tcolorbox` の使い方の例：
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-<div class="tcolorbox">
+先生や先輩に学位論文を添削してもらう際は，貴重な時間を割いて見てもらっているので添削者への配慮が大事です．
+特にこのマニュアルの[LaTeXの基本](/TUS-ME_thesis_template_manual/manual/basic/)から[BibTeXによる参考文献一覧の出力](/TUS-ME_thesis_template_manual/manual/bibtex/)にかけての内容をよく読んで，研究内容と関係の無い些末なミスばかり指摘されることのないように気をつけましょう．
+学位論文執筆時に参考になる自己チェックリストは [こちら](https://github.com/ryo-ARAKI/thesis_template_ou_es/blob/master/self_checklist.md)．
 
-枠にタイトルを入れる場合．
+## メモ書きの活用
+
+また，学位論文の PDF ファイルには本文だけでなく，これから書き足す予定の内容や添削者に対する相談・メモなども併せて書いておくといいでしょう．
+
+<Tabs>
+<TabItem label="LaTeX">
+
+`tcolorbox` パッケージの「枠」を使うと，一目見て本文とは別のメモ書きであるとわかるのでオススメです．
+このテンプレートのマニュアルでも `tcolorbox` を活用しています．
 
 ```latex
 \begin{tcolorbox}[title={ここにタイトルを入れる}]
@@ -17,38 +27,77 @@ sidebar:
 \end{tcolorbox}
 ```
 
-</div>
-
-<div class="tcolorbox">
-
-枠にタイトルを入れない場合．
-
 ```latex
 \begin{tcolorbox}
     枠にタイトルを入れない場合．
 \end{tcolorbox}
 ```
 
-</div>
+添削者が iPad 等のタブレットを持っていれば添削は比較的楽にできますが，人によっては指摘点を文章に書き起こす人もいるでしょう．
+`main.tex` のプリアンブルに書いてある `\linenumbers` は行番号を PDF ファイルに出力する命令です．
+添削時は行番号を表示したものを渡すとよいでしょう．
+ただし，<span style="color: red">最終提出時は `\linenumbers` をコメントアウトして行番号を消すのを忘れないように</span>．
 
-添削者が iPad 等のタブレットを持っていれば添削は比較的楽にできますが，人によっては指摘点を文章に書き起こす人もいるでしょう． `main.tex` のプリアンブルに書いてある `\linenumbers` は行番号を PDF ファイルに出力する命令です． 添削時は行番号を表示したものを渡すとよいでしょう． ただし，<span style="color: red">最終提出時は `\linenumbers` をコメントアウトして行番号を消すのを忘れないように</span>．
+</TabItem>
+<TabItem label="Typst">
 
-また，`tex` ファイルの差分は Git を使えば確認できますが，添削者が読む PDF ファイルを見てもどこが変わったか簡単にはわかりません． `latexdiff` や `latexdiff-vc` という機能を使えば `tex` ファイルの差分を PDF ファイルに反映できます． 先生や先輩からの添削・指摘を受け，文章のどこがどのように変わったかを確認する際に便利です． Git を利用していない人は [`latexdiff`](#sec:latexdiff) を，Git を利用している人は [`latexdiff-vc`](#sec:latexdiff-vc) を使いましょう．
+Typst版のテンプレートでは，コメントを書くための専用関数`comment`が用意されているので，そちらを使うと便利です．
 
-## `latexdiff`
-
-ここでは `latexdiff` を用いた差分ファイルの作成方法を説明します． 修正前のファイル名を `old.tex`，修正後のファイル名を `new.tex` とすると，
-
-<div class="tcolorbox">
-
-```shell
-$ latexdiff -e utf8 -t CFONT --flatten old.tex new.tex > diff.tex
-$ latexmk diff.tex
+```typst
+#comment(title: [ここにタイトルを入れる])[
+    枠にタイトルを入れる場合．
+]
 ```
 
-</div>
+```typst
+#comment[
+    枠にタイトルを入れない場合．
+]
+```
 
-のようにすれば差分ファイル `diff.tex` から `diff.pdf` ファイルを生成できます． 変更前の消した箇所が<span style="color: red">小さい赤字</span>で，変更後の新しく入れた箇所が<span style="color: blue">通常サイズの青字</span>で表示されます． ただし，修正があまりにも大きい場合はうまくタイプセットできないことがあるので気をつけましょう． `--flatten` オプションを使用することで，`\input{}` の部分を実際に読み込むファイルに置き換えてくれます． しかし，`\input{}` で読み込むファイル名を変えておかないと古い内容と新しい内容を比較できません． そのため，差分を取る基準となる時点で `chapter/` を `chapter-old/` などの名称でコピーを作成し，`old.tex` 内で
+添削者が iPad 等のタブレットを持っていれば添削は比較的楽にできますが，人によっては指摘点を文章に書き起こす人もいるでしょう．
+`main.typ` のプリアンブルに書いてある `#show: check-contents` は行番号を PDF ファイルに出力する命令です．
+添削時は行番号を表示したものを渡すとよいでしょう．
+ただし，<span style="color: red">最終提出時は `#show: check-contents` をコメントアウトして行番号を消すのを忘れないように</span>．
+またTypst版のテンプレートでは，最終提出時にコメントを残してしまうのを避けるため，`#show: check-contents`が有効な場合にPDFの最終ページにコメント一覧表が自動で出力されるようになっています．
+加えて，図のラベルや引用ミスがあると警告が出るようになっています．
+
+</TabItem>
+</Tabs>
+
+
+## 差分ファイルの作成
+
+また，`.tex`や`.typ`ファイルの差分は Git を使えば確認できますが，添削者が読む PDF ファイルを見てもどこが変わったか簡単にはわかりません．
+LaTeXの場合，`latexdiff` や `latexdiff-vc` という機能を使えば `tex` ファイルの差分を PDF ファイルに反映できます．
+先生や先輩からの添削・指摘を受け，文章のどこがどのように変わったかを確認する際に便利です．
+Git を利用していない人は [`latexdiff`](#sec:latexdiff) を，Git を利用している人は [`latexdiff-vc`](#sec:latexdiff-vc) を使いましょう．
+Typstの場合，デフォルトでは差分を出力する機能はありませんが，Typstの差分出力機能の開発が進められているので，今後のアップデートに期待しましょう．
+本テンプレートでは，本文中のテキストのみ差分を出力する`palimset`パッケージを使用して差分を出力することができます．
+
+<Tabs>
+<TabItem label="LaTeX">
+
+LaTeXでは，`latexdiff` や `latexdiff-vc` の2つの方法で差分を出力できます．
+それぞれ，Gitを使わない場合と使う場合で使い分けます．
+
+<Tabs>
+<TabItem label="latexdiff">
+
+ここでは `latexdiff` を用いた差分ファイルの作成方法を説明します．
+修正前のファイル名を `old.tex`，修正後のファイル名を `new.tex` とすると，
+
+```shell
+latexdiff -e utf8 -t CFONT --flatten old.tex new.tex > diff.tex
+latexmk diff.tex
+```
+
+のようにすれば差分ファイル `diff.tex` から `diff.pdf` ファイルを生成できます．
+変更前の消した箇所が<span style="color: red">小さい赤字</span>で，変更後の新しく入れた箇所が<span style="color: blue">通常サイズの青字</span>で表示されます．
+ただし，修正があまりにも大きい場合はうまくタイプセットできないことがあるので気をつけましょう．
+`--flatten` オプションを使用することで，`\input{}` の部分を実際に読み込むファイルに置き換えてくれます．
+しかし，`\input{}` で読み込むファイル名を変えておかないと古い内容と新しい内容を比較できません．
+そのため，差分を取る基準となる時点で `chapter/` を `chapter-old/` などの名称でコピーを作成し，`old.tex` 内で
 
 ```latex
 \input{chapter-old/introduction.tex}
@@ -59,34 +108,68 @@ $ latexmk diff.tex
 \input{chapter-old/acknowledgement.tex}
 ```
 
-のようにすることで章ごとの変更を正しく反映できます． このとき，`new.tex` の中身は `\input{chapter/introduction.tex}` のままで大丈夫です．
+のようにすることで章ごとの変更を正しく反映できます．
+このとき，`new.tex` の中身は `\input{chapter/introduction.tex}` のままで大丈夫です．
 
-## `latexdiff-vc`
+</TabItem>
+<TabItem label="latexdiff-vc">
 
-`latexdiff` は `tex` ファイルの差分を PDF ファイルに書き起こせる便利なツールですが，ファイル名を変更するなどの作業はやはり面倒です． `latexdiff-vc` を使えば Git で管理している任意のコミットとの差分を取ることができ大変便利です． Git ユーザーは `latexdiff-vc` を使いましょう． 例えば現在の `main.tex` と一つ前のコミットとの差分を見たいときは，
-
-<div class="tcolorbox">
+`latexdiff` は `tex` ファイルの差分を PDF ファイルに書き起こせる便利なツールですが，ファイル名を変更するなどの作業はやはり面倒です．
+`latexdiff-vc` を使えば Git で管理している任意のコミットとの差分を取ることができ大変便利です．
+Git ユーザーは `latexdiff-vc` を使いましょう． 例えば現在の `main.tex` と一つ前のコミットとの差分を見たいときは，
 
 ```shell
-$ latexdiff-vc -e utf8 -t CFONT --flatten --git --force -r HEAD~ main.tex
+latexdiff-vc -e utf8 -t CFONT --flatten --git --force -r HEAD~ main.tex
 ```
 
-</div>
+とすることで差分ファイルを生成できます．
+指定するコミットを変える際は `HEAD~` を置き換えてください．
+任意のコミットのハッシュ値を指定することもできます．
+生成される差分 `tex` ファイルの名前は指定したコミットによって異なります．
 
-とすることで差分ファイルを生成できます． 指定するコミットを変える際は `HEAD~` を置き換えてください． 任意のコミットのハッシュ値を指定することもできます． 生成される差分 `tex` ファイルの名前は指定したコミットによって異なります．
+また，`latexdiff-vc` を Windows で使用する際に実行できない不具合を確認しています．
+これに関してはデバッグしたファイルを [`latexdiff-vc_windows`](https://github.com/Yuki-MATSUKAWA/latexdiff-vc_windows) で公開しているので，Windows ユーザーは `latexdiff-vc` を使用する前に [`README`](https://github.com/Yuki-MATSUKAWA/latexdiff-vc_windows?tab=readme-ov-file#readme) をよく読んで，`latexdiff-vc.pl` を TeX Live 標準のものから置き換えてください． 指定するコミットに対応して出力されるファイル名も異なるので注意してください．
 
-また，`latexdiff-vc` を Windows で使用する際に実行できない不具合を確認しています． これに関してはデバッグしたファイルを [`latexdiff-vc_windows`](https://github.com/Yuki-MATSUKAWA/latexdiff-vc_windows) で公開しているので，Windows ユーザーは `latexdiff-vc` を使用する前に [`README`](https://github.com/Yuki-MATSUKAWA/latexdiff-vc_windows?tab=readme-ov-file#readme) をよく読んで，`latexdiff-vc.pl` を TeX Live 標準のものから置き換えてください． 指定するコミットに対応して出力されるファイル名も異なるので注意してください．
+</TabItem>
+</Tabs>
 
-<div class="tcolorbox">
+</TabItem>
+<TabItem label="Typst">
+
+先に述べたとおり，Typstではデフォルトで差分を出力する機能はないため，代替手段として`palimset`パッケージを使用して差分を取得します．
+
+:::caution[注意]
+Typst版のテンプレートではGit管理することを前提としていることに注意してください．
+Git管理していない場合は，[`palimset`パッケージのドキュメント](https://typst.app/universe/package/palimset/)を参照して，差分を取得するための方法を検討してください．
+:::
+
+卒論本体の差分をとるには，以下のようにコマンドを実行します．
+
+```shell
+bash diff.sh main.typ <ハッシュ値>
+```
+
+`<ハッシュ値>`にgitで管理しているハッシュ値を入れます．
+上記のスクリプトを実行すると，現在の`main.typ`の内容と`<ハッシュ値>`の内容の差分ファイル`diff.pdf`を作成します．
+
+卒業論文のアブストラクトの差分をとるには，以下のようにコマンドを実行します．
+
+```shell
+bash diff.sh abstract/abst_bachelor.typ <ハッシュ値>
+```
+
+修士論文のアブストラクトの差分を取る場合には，以下のコマンドを使用します．
+
+```shell
+bash diff.sh abstract/abst_master.typ <ハッシュ値>
+```
+
+</TabItem>
+</Tabs>
+
 
 - [GitHub: `thesis_template_ou_es`](https://github.com/ryo-ARAKI/thesis_template_ou_es)
-
 - [Overleaf: How to use latexdiff on Overleaf](https://www.overleaf.com/learn/latex/Articles/How_to_use_latexdiff_on_Overleaf)
-
 - [Gitで管理しているLaTeXのdiffをpdfで見る(TeXLive2015版)](https://nekketsuuu.github.io/entries/2017/01/27/latexdiff-vc.html)
-
 - [latexdiff](https://abenori.blogspot.com/2016/06/latexdiff.html)
-
 - [GitHub: `latexdiff-vc_windows`](https://github.com/Yuki-MATSUKAWA/latexdiff-vc_windows)
-
-</div>
